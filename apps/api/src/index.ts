@@ -4,6 +4,7 @@
 import { createHTTPServer } from '@trpc/server/adapters/standalone';
 import { publicProcedure, router } from './trpc.js';
 import {inferRouterInputs, inferRouterOutputs} from "@trpc/server";
+import cors from 'cors';
 
 const appRouter = router({
   user: {
@@ -38,6 +39,9 @@ export type RouterOutput = inferRouterOutputs<AppRouter>;
 
 const server = createHTTPServer({
   router: appRouter,
+  middleware: cors({
+    origin: '*',
+  })
 });
 
 server.listen(3000);
