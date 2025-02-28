@@ -1,7 +1,7 @@
-import nextjsConfig from '@repo/config-eslint/next.js'
+import reactConfig from '@repo/config-eslint/react.js'
 
 export default [
-  ...nextjsConfig,
+  ...reactConfig,
   {
     ignores: ['node_modules', 'build', 'postcss.config.js'],
     rules: {

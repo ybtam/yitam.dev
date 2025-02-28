@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Accounting Proxy",
-  description: "Make accounting for you and your accountant easier",
+  title: "Manage your projects",
+  description: "Make your projects management easier",
 };
 
 export default async function RootLayout({
