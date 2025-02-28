@@ -1,0 +1,51 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [
+    "**/.env.*local",
+    ".env"
+  ],
+  "globalEnv": [
+    "DB_HOST",
+    "DB_NAME",
+    "DB_USERNAME",
+    "DB_PASSWORD",
+    "JWT_TOKEN",
+    "GRAPHQL_ENDPOINT",
+    "NEXT_PUBLIC_GRAPHQL_ENDPOINT",
+    "AUTH_SECRET",
+    "GOOGLE_MAPS_API_KEY",
+    "PUBLIC_GOOGLE_MAPS_API_KEY",
+    "AUTH_TRUST_HOST",
+    "DOMAIN_ID",
+    "HOST",
+    "SENDGRID_API_KEY",
+    "NEXT_PUBLIC_POSTHOG_KEY",
+    "NEXT_PUBLIC_POSTHOG_HOST",
+    "PLATFORM_URL",
+    "NEXT_RUNTIME"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
+    },
+    "lint": {},
+    "lint:fix": {},
+    "type-check": {},
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "clean": {
+      "cache": false
+    },
+    "test": {
+      "cache": false
+    },
+    "start": {},
+    "migrate:up": {
+      "cache": false
+    }
+  }
+}

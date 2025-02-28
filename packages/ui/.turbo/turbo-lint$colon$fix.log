@@ -1,0 +1,6 @@
+
+
+> @repo/ui@1.3.0 lint:fix /Users/yitam/Documents/code/startups/accproxy.com/packages/ui
+> eslint './**' --fix
+
+Pages directory cannot be found at /Users/yitam/Documents/code/startups/accproxy.com/packages/ui/pages or /Users/yitam/Documents/code/startups/accproxy.com/packages/ui/src/pages. If using a custom path, please configure with the `no-html-link-for-pages` rule in your eslint config file.

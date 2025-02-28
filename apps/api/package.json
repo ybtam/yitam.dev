@@ -1,0 +1,36 @@
+{
+  "name": "@apps/api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "lint": "eslint './**'",
+    "lint:fix": "eslint './**' --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@envelop/core": "^5.0.3",
+    "jsonwebtoken": "^9.0.2",
+    "minio": "^8.0.4",
+    "@trpc/server": "npm:@trpc/server@next",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@envelop/types": "^5.0.0",
+    "@repo/config-eslint": "workspace:*",
+    "@repo/config-typescript": "workspace:*",
+    "@types/node": "^22.13.4",
+    "eslint": "^9.20.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}
