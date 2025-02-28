@@ -1,20 +1,17 @@
 'use client'
 
-import {trpc} from "@/utils/trpc";
+import {trpcClient, useTRPC} from "@/utils/trpcClient";
 import {useEffect, useState} from "react";
 import {RouterOutput} from "@apps/api";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Page() {
-  //todo replace with tanstack
+  const trpc = useTRPC();
 
-  const [user, setUser] = useState<RouterOutput['user']['list']>()
-
-  useEffect(() => {
-    trpc.user.list.query().then(setUser)
-  }, []);
+  const {data} = useQuery(trpc.user.list.queryOptions())
 
   return <div>
     <h1>Hello, world!</h1>
-    {user?.map(user => <p>{user.name}</p>)}
+    {data?.map(user => <p key={user.id}>{user.name}</p>)}
   </div>
 }

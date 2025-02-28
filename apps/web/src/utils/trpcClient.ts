@@ -8,9 +8,10 @@ import {
   unstable_httpSubscriptionLink,
 } from '@trpc/client';
 import {AppRouter} from "@apps/api";
+import {createTRPCContext} from "@trpc/tanstack-react-query";
 
 // Initialize the tRPC client
-export const trpc = createTRPCClient<AppRouter>({
+export const trpcClient = createTRPCClient<AppRouter>({
   links: [
     splitLink({
       condition: (op) => op.type === 'subscription',
@@ -23,3 +24,7 @@ export const trpc = createTRPCClient<AppRouter>({
     }),
   ],
 });
+
+
+export const {useTRPC, useTRPCClient, TRPCProvider} = createTRPCContext<AppRouter>();
+

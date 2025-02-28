@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@repo/ui": "workspace:*",
+    "@repo/sdk": "workspace:*",
+    "@trpc/tanstack-react-query": "11.0.0-rc.819",
+    "@tanstack/react-query": "^5.66.11",
     "lucide-react": "^0.475.0",
     "next": "^15.2.0",
     "react": "^19.0.0",
