@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "start": "turbo start",
+    "dev": "dotenv -e .env -- turbo dev",
+    "lint": "turbo lint",
+    "lint:fix": "turbo lint:fix",
+    "migrate:up": "turbo migrate:up",
+    "type-check": "turbo type-check",
+    "clean": "turbo clean",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "test": "turbo test"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^7.4.2",
+    "turbo": "^2.4.4"
+  },
+  "packageManager": "pnpm@10.5.1",
+  "engines": {
+    "node": ">=22"
+  },
+  "name": "project-manager"
+}

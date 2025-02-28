@@ -1,0 +1,5 @@
+
+
+> @repo/ui@1.3.0 lint:fix /Users/yitam/Documents/code/startups/project-manager/packages/ui
+> eslint './**' --fix
+
