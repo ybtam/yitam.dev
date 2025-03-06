@@ -1,1 +1,1 @@
-# project-manager
+# Base template
