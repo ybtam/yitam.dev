@@ -17,8 +17,8 @@ export default tseslint.config(
   {
     ...sonarjs.configs.recommended,
   },
-  eslintPluginPrettierRecommended,
   ...turboConfig,
+  eslintPluginPrettierRecommended,
   eslintConfigPrettier,
   {
     rules: {
