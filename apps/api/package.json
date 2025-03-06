@@ -12,7 +12,8 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "lint": "eslint './**'",
-    "lint:fix": "eslint './**' --fix"
+    "lint:fix": "eslint './**' --fix",
+    "type-check": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
