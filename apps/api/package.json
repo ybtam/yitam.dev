@@ -18,6 +18,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@apps/db": "workspace:*",
     "@envelop/core": "^5.0.3",
     "@trpc/server": "npm:@trpc/server@next",
     "cors": "^2.8.5",
