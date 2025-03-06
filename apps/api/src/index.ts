@@ -2,33 +2,16 @@
  * This a minimal tRPC server
  */
 import { createHTTPServer } from '@trpc/server/adapters/standalone';
-import { publicProcedure, router } from './trpc.js';
+import { router } from './trpc.js';
 import {inferRouterInputs, inferRouterOutputs} from "@trpc/server";
 import cors from 'cors';
+import {userRouter} from "./routes/user/index.ts";
+import {client} from "@apps/db";
+
+client.connect()
 
 const appRouter = router({
-  user: {
-    list: publicProcedure.query(async () => {
-      return [
-        {
-          id: 1,
-          name: 'John Doe',
-        },
-        {
-          id: 2,
-          name: 'Jane Doe',
-        }
-      ]
-    }),
-  },
-  examples: {
-    iterable: publicProcedure.query(async function* () {
-      for (let i = 0; i < 3; i++) {
-        await new Promise((resolve) => setTimeout(resolve, 500));
-        yield i;
-      }
-    }),
-  },
+  user: userRouter,
 });
 
 // Export type router type signature, this is used by the client.
