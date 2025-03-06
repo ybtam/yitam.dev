@@ -29,6 +29,7 @@
     "@envelop/types": "^5.0.0",
     "@repo/config-eslint": "workspace:*",
     "@repo/config-typescript": "workspace:*",
+    "@repo/config-prettier": "workspace:*",
     "@types/cors": "^2.8.17",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.13.4",
