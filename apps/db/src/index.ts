@@ -1,6 +1,6 @@
 import { drizzle } from 'drizzle-orm/node-postgres'
 
-import * as Schemas from './schemas'
+import * as Schemas from './schemas/index.js'
 import  pg from 'pg'
 const { Client } = pg
 
@@ -16,4 +16,4 @@ export const db = drizzle(client, {
   schema: Schemas
 })
 
-export * from './schemas'
+export * from './schemas/index.js'

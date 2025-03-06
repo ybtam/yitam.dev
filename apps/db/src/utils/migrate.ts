@@ -1,6 +1,6 @@
 import { migrate } from 'drizzle-orm/node-postgres/migrator'
 
-import { client, db } from '../index'
+import { client, db } from '../index.js'
 
 async function runMigration() {
   await client.connect()

@@ -5,7 +5,7 @@ import { createHTTPServer } from '@trpc/server/adapters/standalone';
 import { router } from './trpc.js';
 import {inferRouterInputs, inferRouterOutputs} from "@trpc/server";
 import cors from 'cors';
-import {userRouter} from "./routes/user";
+import {userRouter} from "./routes/user/index.ts";
 import {client} from "@apps/db";
 
 client.connect()
