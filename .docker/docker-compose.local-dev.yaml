@@ -1,4 +1,5 @@
-name: accproxy.com
+#todo change name
+name: mono-kadze-repo
 services:
   db:
     image: postgres:latest
