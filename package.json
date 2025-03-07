@@ -9,14 +9,14 @@
     "migrate:up": "turbo migrate:up",
     "type-check": "turbo type-check",
     "clean": "turbo clean",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "test": "turbo test"
+    "test": "turbo test",
+    "create-db": "pnpm --filter @apps/db create-db"
   },
   "devDependencies": {
     "dotenv-cli": "^7.4.2",
     "turbo": "^2.4.4"
   },
-  "packageManager": "pnpm@10.5.1",
+  "packageManager": "pnpm@10.6.0",
   "engines": {
     "node": ">=22"
   },

@@ -9,11 +9,10 @@
     "sourceMap": true,                // Generate source maps for debugging
     "skipLibCheck": true,             // Skip type checking of all declaration files
     "forceConsistentCasingInFileNames": true,
-    "noEmit": false,
-    "allowImportingTsExtensions": true
+    "noEmit": false
   },
   "ts-node": {
     "esm": true
   },
-  "include": ["./src/**/*", "./test/**/*"]
+  "include": ["./src/**/*", "./test/**/*", "./db/**/*", "drizzle.config.ts"]
 }
