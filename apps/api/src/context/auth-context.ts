@@ -1,14 +1,11 @@
-import * as trpcNext from '@trpc/server/adapters/next';
 import {decodeAndVerifyJwtToken} from "../routes/auth/util.js";
+import {CreateFastifyContextOptions} from "@trpc/server/adapters/fastify";
 
-export async function createContext({
-  req,
-  res,
-}: trpcNext.CreateNextContextOptions) {
+export async function createContext(opts: CreateFastifyContextOptions) {
   async function getUserFromHeader() {
-    if (req.headers.authorization) {
+    if (opts.req.headers.authorization) {
       return decodeAndVerifyJwtToken(
-        req.headers.authorization.split(' ')[1],
+        opts.req.headers.authorization.split(' ')[1],
       );
     }
     return null;

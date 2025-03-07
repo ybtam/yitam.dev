@@ -5,7 +5,7 @@ import { AuthContext } from './context/auth-context.ts';
  * Initialization of tRPC backend
  * Should be done only once per backend!
  */
-const t = initTRPC.context<AuthContext>().create({});
+const t = initTRPC.context<AuthContext>().create();
 export const router = t.router;
 
 export const publicProcedure = t.procedure;
