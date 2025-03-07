@@ -7,8 +7,8 @@ import { AuthContext } from './context/auth-context.ts';
  */
 const t = initTRPC.context<AuthContext>().create({});
 export const router = t.router;
-export const publicProcedure = t.procedure;
 
+export const publicProcedure = t.procedure;
 export const protectedProcedure = t.procedure.use(
   async function isAuthed(opts) {
     const { ctx } = opts;
