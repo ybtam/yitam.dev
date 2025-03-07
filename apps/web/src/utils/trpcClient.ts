@@ -16,10 +16,10 @@ export const trpcClient = createTRPCClient<AppRouter>({
     splitLink({
       condition: (op) => op.type === 'subscription',
       true: unstable_httpSubscriptionLink({
-        url: 'http://localhost:3000',
+        url: 'http://localhost:4000/trpc',
       }),
       false: unstable_httpBatchStreamLink({
-        url: 'http://localhost:3000',
+        url: 'http://localhost:4000/trpc',
       }),
     }),
   ],
