@@ -1,5 +1,5 @@
 import * as trpcNext from '@trpc/server/adapters/next';
-import { decodeAndVerifyJwtToken } from '../utils/jwt.ts';
+import {decodeAndVerifyJwtToken} from "../routes/auth/util.js";
 
 export async function createContext({
   req,
@@ -7,16 +7,18 @@ export async function createContext({
 }: trpcNext.CreateNextContextOptions) {
   async function getUserFromHeader() {
     if (req.headers.authorization) {
-      const user = decodeAndVerifyJwtToken(
+      return decodeAndVerifyJwtToken(
         req.headers.authorization.split(' ')[1],
       );
-      return user;
     }
     return null;
   }
+
   const user = await getUserFromHeader();
+
   return {
-    user,
+    user
   };
 }
+
 export type AuthContext = Awaited<ReturnType<typeof createContext>>;
