@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./zod": "./src/zod.ts"
   },
   "type": "module",
   "scripts": {
@@ -21,8 +22,9 @@
   "dependencies": {
     "@apps/db": "workspace:*",
     "@envelop/core": "^5.0.3",
+    "@fastify/cors": "^11.0.0",
     "@trpc/server": "npm:@trpc/server@next",
-    "cors": "^2.8.5",
+    "fastify": "^5.2.1",
     "jsonwebtoken": "^9.0.2",
     "minio": "^8.0.4",
     "zod": "^3.24.2"
@@ -30,8 +32,8 @@
   "devDependencies": {
     "@envelop/types": "^5.0.0",
     "@repo/config-eslint": "workspace:*",
-    "@repo/config-typescript": "workspace:*",
     "@repo/config-prettier": "workspace:*",
+    "@repo/config-typescript": "workspace:*",
     "@types/cors": "^2.8.17",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.13.4",
