@@ -1,3 +1,3 @@
-import BaseConfig from '@repo/config-prettier/base'
+import BaseConfig from '@repo/config-prettier/base.js'
 
 export default BaseConfig
