@@ -30,6 +30,7 @@
     "@repo/config-eslint": "workspace:*",
     "@repo/config-typescript": "workspace:*",
     "@types/cors": "^2.8.17",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.13.4",
     "eslint": "^9.20.1",
     "tsx": "^4.19.2",
