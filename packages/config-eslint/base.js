@@ -19,7 +19,6 @@ export default tseslint.config(
   },
   ...turboConfig,
   eslintPluginPrettierRecommended,
-  eslintConfigPrettier,
   {
     rules: {
       'sonarjs/todo-tag': 'warn',
