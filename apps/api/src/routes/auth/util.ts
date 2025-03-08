@@ -1,11 +1,11 @@
-import jwt from 'jsonwebtoken';
+import jwt, {JwtPayload} from 'jsonwebtoken';
 import {z} from 'zod';
 
 const JWT_TOKEN = process.env.JWT_TOKEN!;
 if (!JWT_TOKEN) throw new Error('JWT_TOKEN is not set');
 
 const TokenPayloadSchema = z.object({
-  userId: z.string(), // User ID
+  userId: z.coerce.number(), // User ID
   exp: z.number(),
 });
 
@@ -23,17 +23,20 @@ export function decodeAndVerifyJwtToken(token: string) {
 }
 
 export interface UserPayload {
-  userId: string;
+  userId: number;
   email: string;
 }
 
-export function generateToken(payload: UserPayload): string {
-  return jwt.sign(payload, JWT_TOKEN, { expiresIn: '1h' }); // Adjust expiration as needed
+export function generateTokens(payload: UserPayload) {
+  return {
+    accessToken: jwt.sign(payload, JWT_TOKEN, { expiresIn: '8h' }),
+    refreshToken: jwt.sign(payload, JWT_TOKEN, { expiresIn: '30d' })
+  }
 }
 
-export function verifyToken(token: string): UserPayload | null {
+export function verifyToken(token: string) {
   try {
-    return jwt.verify(token, JWT_TOKEN) as UserPayload;
+    return jwt.verify(token, JWT_TOKEN) as JwtPayload & UserPayload;
   } catch (error) {
     return null;
   }

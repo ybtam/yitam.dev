@@ -29,6 +29,9 @@ importers:
       '@trpc/server':
         specifier: npm:@trpc/server@next
         version: 11.0.0-rc.819(typescript@5.7.3)
+      drizzle-orm:
+        specifier: ^0.40.0
+        version: 0.40.0(@types/pg@8.11.11)(gel@2.0.1)(pg@8.13.3)
       fastify:
         specifier: ^5.2.1
         version: 5.2.1
@@ -283,9 +286,6 @@ importers:
       '@trpc/tanstack-react-query':
         specifier: ^11.0.0-rc.824
         version: 11.0.0-rc.824(@tanstack/react-query@5.66.11(react@19.0.0))(@trpc/client@11.0.0-rc.824(@trpc/server@11.0.0-rc.819(typescript@5.8.2))(typescript@5.8.2))(@trpc/server@11.0.0-rc.819(typescript@5.8.2))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.8.2)
-      '@types/react':
-        specifier: ^19.0.2
-        version: 19.0.10
       next:
         specifier: 15.1.0
         version: 15.1.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -314,6 +314,9 @@ importers:
       '@types/node':
         specifier: ^22.13.4
         version: 22.13.5
+      '@types/react':
+        specifier: ^19.0.2
+        version: 19.0.10
       eslint:
         specifier: ^9.20.1
         version: 9.21.0(jiti@2.4.2)
