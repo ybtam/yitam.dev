@@ -1,5 +1,12 @@
 # Tamyikadze base template
 
+## Copy template
+
+```bash
+pnpm dlx create-turbo@latest --example https://github.com/tamyikadze/mono-kadze-repo.git
+```
+
+
 ## Getting Started
 
 First change the project name in the `package.json` and `./docker/docker-compose.local-dev.yml` files.
