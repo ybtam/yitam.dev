@@ -4,7 +4,10 @@ import {eq} from "drizzle-orm";
 
 const me = protectedProcedure.query(async ({ctx}) => {
   return db.query.users.findFirst({
-    where: eq(users.id, ctx.user.userId)
+    where: eq(users.id, ctx.user.userId),
+    columns: {
+      password: false
+    }
   })
 })
 

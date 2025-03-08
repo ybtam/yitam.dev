@@ -6,10 +6,11 @@
     "rootDir": ".",               // Source directory
     "esModuleInterop": true,          // Enables compatibility with CommonJS
     "strict": true,                   // Enable strict type checking
-    "sourceMap": true,                // Generate source maps for debugging
+    "sourceMap": false,                // Generate source maps for debugging
     "skipLibCheck": true,             // Skip type checking of all declaration files
     "forceConsistentCasingInFileNames": true,
-    "noEmit": false
+    "noEmit": true,
+    "allowImportingTsExtensions": true
   },
   "ts-node": {
     "esm": true

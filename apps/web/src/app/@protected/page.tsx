@@ -13,7 +13,11 @@ export default function Page() {
     <h1>Hello, world!</h1>
     {userList.data?.map(user => <p key={user.id}>{user.firstName} {user.lastName}</p>)}
     <h2>Me</h2>
-    {me.data?.userId && <p>User ID: {me.data.userId}</p>}
-    {me.data?.exp && <p>Exp: {me.data.exp}</p>}
+    {me.data && (
+      <div>
+        <p>User ID: {me.data.id}</p>
+        <p>Email: {me.data.email}</p>
+      </div>
+    )}
   </div>
 }
