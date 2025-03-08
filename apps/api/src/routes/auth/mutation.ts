@@ -5,7 +5,7 @@ import {loginInputSchema} from "./schema.js";
 import {db, users} from "@apps/db";
 import {and, eq} from "drizzle-orm";
 
-const login=  publicProcedure
+const login = publicProcedure
   .input(loginInputSchema)
   .mutation(async ({ input }) => {
     const selectUsers = await db.query.users.findFirst({
@@ -13,17 +13,17 @@ const login=  publicProcedure
         eq(users.email, input.email),
         eq(users.password, input.password)
       )
-    })
+    });
 
     if (!selectUsers) throw new Error('Invalid email or password');
 
-    const {accessToken, refreshToken} = generateTokens({
+    const { accessToken, refreshToken } = generateTokens({
       userId: selectUsers.id,
       email: selectUsers.email
     });
 
-    return {accessToken, refreshToken, expiresIn: 3600};
-  })
+    return { accessToken, refreshToken, expiresIn: 3600 };
+  });
 
 const generateAccessToken = publicProcedure
   .input(z.object({
