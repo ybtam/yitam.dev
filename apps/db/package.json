@@ -17,7 +17,7 @@
     "build": "tsc",
     "lint": "eslint './**'",
     "lint:fix": "eslint './**' --fix",
-    "create-db": "dotenv -e ../../.env -- tsx src/utils/create-db.ts",
+    "db:create": "dotenv -e ../../.env -- tsx src/utils/create-db.ts",
     "type-check": "tsc --noEmit"
   },
   "keywords": [],
