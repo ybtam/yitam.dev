@@ -5,8 +5,7 @@ const JWT_TOKEN = process.env.JWT_TOKEN!;
 if (!JWT_TOKEN) throw new Error('JWT_TOKEN is not set');
 
 const TokenPayloadSchema = z.object({
-  id: z.string(), // User ID
-  role: z.string().optional(), // Optional role
+  userId: z.string(), // User ID
   exp: z.number(),
 });
 
