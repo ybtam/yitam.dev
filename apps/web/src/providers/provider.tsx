@@ -3,9 +3,9 @@
 import {PropsWithChildren} from "react";
 import {SdkProvider} from "@repo/sdk";
 
-export const Provider = ({children}: PropsWithChildren) => {
+export const Provider = ({children, ...props}: PropsWithChildren<{ accessToken?: string }>) => {
   return (
-    <SdkProvider>
+    <SdkProvider {...props}>
       {children}
     </SdkProvider>
   )

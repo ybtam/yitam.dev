@@ -4,6 +4,7 @@ import "@/style/globals.css";
 import {Provider} from "@/providers/provider";
 import {ReactNode} from "react";
 import {cn} from "@repo/ui/lib";
+import {auth} from "@repo/sdk";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,20 +22,23 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({
-  children,
-  public: publicApp
+  public: publicApp,
+  protected: protectedApp
 }: Readonly<{
-  children: ReactNode
   public: ReactNode
+  protected: ReactNode
 }>) {
+  const session = await auth()
+
   return (
     <html lang="en">
       <body
         className={cn(geistSans.variable, geistMono.variable, 'antialiased')}
       >
-      <Provider>
-        {children}
-        {publicApp}
+      <Provider accessToken={session?.user?.access_token}>
+        {
+          !session ? publicApp : protectedApp
+        }
       </Provider>
       </body>
     </html>
