@@ -1,3 +1,5 @@
+'use client'
+
 /**
  * This is the client-side code that uses the inferred types from the server
  */
@@ -16,15 +18,14 @@ export const trpcClient = createTRPCClient<AppRouter>({
     splitLink({
       condition: (op) => op.type === 'subscription',
       true: unstable_httpSubscriptionLink({
-        url: 'http://localhost:4000/trpc',
+        url: process.env.NEXT_PUBLIC_API_URL!,
       }),
       false: unstable_httpBatchStreamLink({
-        url: 'http://localhost:4000/trpc',
+        url: process.env.NEXT_PUBLIC_API_URL!,
       }),
     }),
   ],
 });
 
 
-export const {useTRPC, useTRPCClient, TRPCProvider} = createTRPCContext<AppRouter>();
 

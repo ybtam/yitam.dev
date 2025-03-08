@@ -3,10 +3,10 @@
 import { useForm } from "react-hook-form"
 import {Button, Form, FormControl, FormField, FormItem, FormLabel, Input} from "@repo/ui";
 import {useMutation} from "@tanstack/react-query";
-import {useTRPC} from "@/utils/trpcClient.ts";
 import {z} from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {loginInputSchema} from "@apps/api/zod";
+import {useTRPC} from "@repo/sdk";
 
 
 export const LoginForm = () => {

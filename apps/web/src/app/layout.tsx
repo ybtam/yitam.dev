@@ -21,9 +21,11 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({
-  children
+  children,
+  public: publicApp
 }: Readonly<{
   children: ReactNode
+  public: ReactNode
 }>) {
   return (
     <html lang="en">
@@ -32,6 +34,7 @@ export default async function RootLayout({
       >
       <Provider>
         {children}
+        {publicApp}
       </Provider>
       </body>
     </html>
