@@ -4,8 +4,6 @@ import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
 import perfectionist from "eslint-plugin-perfectionist";
 import turboConfig from 'eslint-config-turbo/flat';
-import eslintConfigPrettier from "eslint-config-prettier";
-import importPlugin from 'eslint-plugin-import';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 
 export default tseslint.config(
@@ -19,7 +17,6 @@ export default tseslint.config(
   },
   ...turboConfig,
   eslintPluginPrettierRecommended,
-  eslintConfigPrettier,
   {
     rules: {
       'sonarjs/todo-tag': 'warn',

@@ -1,6 +1,5 @@
 import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core'
 
-
 export const users = pgTable('users', {
   createdAt: timestamp('created_at').notNull().defaultNow(),
   email: text('email').notNull().unique(),

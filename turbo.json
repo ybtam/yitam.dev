@@ -11,7 +11,9 @@
     "DB_PASSWORD",
     "JWT_TOKEN",
     "AUTH_SECRET",
-    "AUTH_TRUST_HOST"
+    "AUTH_TRUST_HOST",
+    "API_URL",
+    "NEXT_PUBLIC_API_URL"
   ],
   "tasks": {
     "build": {

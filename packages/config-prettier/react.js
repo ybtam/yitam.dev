@@ -1,6 +1,8 @@
-import base from './base.js'
+import base from "./base.js";
 
-export default {
+const config = {
   ...base,
-  plugins: ["prettier-plugin-tailwindcss"]
-}
+  plugins: ["prettier-plugin-tailwindcss"],
+};
+
+export default config;

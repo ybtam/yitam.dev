@@ -1,30 +1,18 @@
-/**
- * This a minimal tRPC server
- */
-import { createHTTPServer } from '@trpc/server/adapters/standalone';
-import { router } from './trpc.js';
-import {inferRouterInputs, inferRouterOutputs} from "@trpc/server";
-import cors from 'cors';
-import {userRouter} from "./routes/user/index.ts";
-import {client} from "@apps/db";
+import { client } from '@apps/db'
+import { createServer } from './server/index.ts'
 
 client.connect()
 
-const appRouter = router({
-  user: userRouter,
-});
+const server = createServer()
 
-// Export type router type signature, this is used by the client.
-export type AppRouter = typeof appRouter;
+;(async () => {
+  try {
+    await server.listen({ port: 4000 })
+    console.log('Server is running on http://localhost:4000')
+  } catch (err) {
+    server.log.error(err)
+    process.exit(1)
+  }
+})()
 
-export type RouterInput = inferRouterInputs<AppRouter>;
-export type RouterOutput = inferRouterOutputs<AppRouter>;
-
-const server = createHTTPServer({
-  router: appRouter,
-  middleware: cors({
-    origin: '*',
-  })
-});
-
-server.listen(3000);
+export type { RouterInput, RouterOutput, AppRouter } from './server/router.ts'

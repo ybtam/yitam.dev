@@ -1,3 +1,7 @@
 import react from '@repo/config-prettier/react.js'
 
-export default react
+const config = {
+  ...react,
+}
+
+export default config
