@@ -279,10 +279,10 @@ importers:
         version: 5.66.11(react@19.0.0)
       '@trpc/client':
         specifier: npm:@trpc/client@next
-        version: 11.0.0-rc.824(@trpc/server@11.0.0-rc.819(typescript@5.7.3))(typescript@5.7.3)
+        version: 11.0.0-rc.824(@trpc/server@11.0.0-rc.819(typescript@5.8.2))(typescript@5.8.2)
       '@trpc/tanstack-react-query':
         specifier: ^11.0.0-rc.824
-        version: 11.0.0-rc.824(@tanstack/react-query@5.66.11(react@19.0.0))(@trpc/client@11.0.0-rc.824(@trpc/server@11.0.0-rc.819(typescript@5.7.3))(typescript@5.7.3))(@trpc/server@11.0.0-rc.819(typescript@5.7.3))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3)
+        version: 11.0.0-rc.824(@tanstack/react-query@5.66.11(react@19.0.0))(@trpc/client@11.0.0-rc.824(@trpc/server@11.0.0-rc.819(typescript@5.8.2))(typescript@5.8.2))(@trpc/server@11.0.0-rc.819(typescript@5.8.2))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.8.2)
       '@types/react':
         specifier: ^19.0.2
         version: 19.0.10
@@ -297,7 +297,10 @@ importers:
         version: 19.0.0
       typescript:
         specifier: ^5.7.2
-        version: 5.7.3
+        version: 5.8.2
+      zod:
+        specifier: ^3.24.2
+        version: 3.24.2
     devDependencies:
       '@repo/config-eslint':
         specifier: workspace:*
@@ -4999,23 +5002,27 @@ snapshots:
       '@tanstack/query-core': 5.66.11
       react: 19.0.0
 
-  '@trpc/client@11.0.0-rc.824(@trpc/server@11.0.0-rc.819(typescript@5.7.3))(typescript@5.7.3)':
+  '@trpc/client@11.0.0-rc.824(@trpc/server@11.0.0-rc.819(typescript@5.8.2))(typescript@5.8.2)':
     dependencies:
-      '@trpc/server': 11.0.0-rc.819(typescript@5.7.3)
-      typescript: 5.7.3
+      '@trpc/server': 11.0.0-rc.819(typescript@5.8.2)
+      typescript: 5.8.2
 
   '@trpc/server@11.0.0-rc.819(typescript@5.7.3)':
     dependencies:
       typescript: 5.7.3
 
-  '@trpc/tanstack-react-query@11.0.0-rc.824(@tanstack/react-query@5.66.11(react@19.0.0))(@trpc/client@11.0.0-rc.824(@trpc/server@11.0.0-rc.819(typescript@5.7.3))(typescript@5.7.3))(@trpc/server@11.0.0-rc.819(typescript@5.7.3))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3)':
+  '@trpc/server@11.0.0-rc.819(typescript@5.8.2)':
+    dependencies:
+      typescript: 5.8.2
+
+  '@trpc/tanstack-react-query@11.0.0-rc.824(@tanstack/react-query@5.66.11(react@19.0.0))(@trpc/client@11.0.0-rc.824(@trpc/server@11.0.0-rc.819(typescript@5.8.2))(typescript@5.8.2))(@trpc/server@11.0.0-rc.819(typescript@5.8.2))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.8.2)':
     dependencies:
       '@tanstack/react-query': 5.66.11(react@19.0.0)
-      '@trpc/client': 11.0.0-rc.824(@trpc/server@11.0.0-rc.819(typescript@5.7.3))(typescript@5.7.3)
-      '@trpc/server': 11.0.0-rc.819(typescript@5.7.3)
+      '@trpc/client': 11.0.0-rc.824(@trpc/server@11.0.0-rc.819(typescript@5.8.2))(typescript@5.8.2)
+      '@trpc/server': 11.0.0-rc.819(typescript@5.8.2)
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
-      typescript: 5.7.3
+      typescript: 5.8.2
 
   '@types/cookie@0.6.0': {}
 

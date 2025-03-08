@@ -16,17 +16,17 @@
     "./auth": "./src/auth/index.ts"
   },
   "peerDependencies": {
-    "@types/react": "^19.0.2",
-    "next": "15.1.0",
-    "next-auth": "5.0.0-beta.25",
-    "react": "^19.0.0",
-    "typescript": "^5.7.2",
+    "@apps/api": "workspace:*",
     "@tanstack/react-query": "^5.66.11",
-    "@apps/api": "workspace:*"
+    "next": "15.1.0",
+    "react": "^19.0.0",
+    "typescript": "^5.7.2"
   },
   "dependencies": {
     "@trpc/client": "npm:@trpc/client@next",
-    "@trpc/tanstack-react-query": "^11.0.0-rc.824"
+    "@trpc/tanstack-react-query": "^11.0.0-rc.824",
+    "zod": "^3.24.2",
+    "next-auth": "5.0.0-beta.25"
   },
   "devDependencies": {
     "@repo/config-eslint": "workspace:*",
@@ -34,6 +34,7 @@
     "@repo/config-typescript": "workspace:*",
     "@types/node": "^22.13.4",
     "eslint": "^9.20.1",
-    "prettier-plugin-tailwindcss": "^0.6.11"
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "@types/react": "^19.0.2"
   }
 }

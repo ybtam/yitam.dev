@@ -1,17 +1,17 @@
 'use client'
 
-import {PropsWithChildren, ReactNode} from "react";
+import {ReactNode} from "react";
 import {TanstackProvider} from "./tanstack-provider.tsx";
-import {QueryClient} from "@tanstack/react-query";
 import {TRPCProvider} from "./trpc-provider.ts";
-import {trpcClient} from "../trpc/client.ts";
+import {trpcClient} from "../trpc";
 
-export const SdkProvider = ({ children }: {
+export const SdkProvider = ({ children, accessToken }: {
   children: ReactNode
+  accessToken?: string
 }) => {
   return <TanstackProvider>
     {(queryClient) => (
-    <TRPCProvider queryClient={queryClient} trpcClient={trpcClient}>{children}</TRPCProvider>
+    <TRPCProvider queryClient={queryClient} trpcClient={trpcClient({accessToken})}>{children}</TRPCProvider>
   )}
   </TanstackProvider>
 }
