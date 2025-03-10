@@ -27,8 +27,6 @@ const generateAccessToken = publicProcedure
     }),
   )
   .mutation(async ({ input }) => {
-    // Authenticate user against your database or authentication service
-
     const payload = verifyToken(input.refreshToken)
     if (payload) {
       const selectUsers = await db.query.users.findFirst({
@@ -37,7 +35,9 @@ const generateAccessToken = publicProcedure
 
       if (!selectUsers) throw new Error('Invalid refresh token')
 
-      const { accessToken } = generateTokens(payload)
+      const { exp, ...safePayload } = payload
+
+      const { accessToken } = generateTokens(safePayload)
 
       return { accessToken, expiresIn: 3600 }
     }
