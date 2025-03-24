@@ -8,9 +8,9 @@ function generateExports({dirPath, pattern, output}: {dirPath: string, pattern: 
 
   schemaFiles.forEach(filePath => {
     // Construct the full path to the schema file.
-    const fullFilePath = path.join('./', filePath);
+    const fullFilePath = path.posix.join('./', filePath);
     // Important: Use backticks for template literals and ${} for variable interpolation.
-    exports.push(`export * from './${fullFilePath.replace(/\\/g, '/')}';`); // Corrected the path separator
+    exports.push(`export * from '${fullFilePath}';`);
   });
 
   const indexContent: string = exports.join('\n');
