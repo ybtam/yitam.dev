@@ -1,0 +1,31 @@
+import * as fs from 'fs';
+import * as path from 'path';
+import * as glob from 'glob';
+
+function generateExports({dirPath, pattern, output}: {dirPath: string, pattern: string, output: string}): void {
+  const exports: string[] = [];
+  const schemaFiles = glob.sync(pattern, { cwd: dirPath });
+
+  schemaFiles.forEach(filePath => {
+    // Construct the full path to the schema file.
+    const fullFilePath = path.join('./', filePath);
+    // Important: Use backticks for template literals and ${} for variable interpolation.
+    exports.push(`export * from './${fullFilePath.replace(/\\/g, '/')}';`); // Corrected the path separator
+  });
+
+  const indexContent: string = exports.join('\n');
+
+  fs.writeFileSync(output, indexContent);
+}
+
+generateExports({
+  dirPath: './src/schemas',
+  pattern: '**/*/schema.ts',
+  output: './src/schemas/index.ts',
+});
+
+generateExports({
+  dirPath: './src/schemas',
+  pattern: '**/*/zod.ts',
+  output: './src/schemas/zod.ts',
+})
