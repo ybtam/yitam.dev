@@ -18,7 +18,8 @@
     "lint": "eslint './**'",
     "lint:fix": "eslint './**' --fix",
     "db:create": "dotenv -e ../../.env -- tsx src/utils/create-db.ts",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "generate:export-schema": "tsx src/utils/generate-export-schema.ts"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +30,7 @@
   "dependencies": {
     "drizzle-orm": "^0.40.0",
     "drizzle-zod": "^0.7.0",
+    "glob": "^11.0.1",
     "zod": "^3.24.2"
   },
   "devDependencies": {
