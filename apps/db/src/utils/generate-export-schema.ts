@@ -15,7 +15,11 @@ function generateExports({dirPath, pattern, output}: {dirPath: string, pattern: 
 
   const indexContent: string = exports.join('\n');
 
-  fs.writeFileSync(output, indexContent);
+  try {
+    fs.writeFileSync(output, indexContent);
+  } catch (err) {
+    console.error(`Error writing to file ${output}:`, err);
+  }
 }
 
 generateExports({
