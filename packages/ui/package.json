@@ -41,9 +41,9 @@
     "@repo/config-eslint": "workspace:*",
     "@repo/config-prettier": "workspace:*",
     "@repo/config-typescript": "workspace:*",
-    "@tailwindcss/cli": "^4.0.17",
-    "@tailwindcss/postcss": "^4.0.17",
-    "@types/node": "^22.13.14",
+    "@tailwindcss/cli": "^4.1.2",
+    "@tailwindcss/postcss": "^4.1.2",
+    "@types/node": "^22.14.0",
     "eslint": "^9.23.0",
     "prettier-plugin-tailwindcss": "^0.6.11"
   },
@@ -59,7 +59,7 @@
     "lucide-react": "^0.475.0",
     "prettier": "^3.5.3",
     "react-hook-form": "^7.55.0",
-    "tailwind-merge": "^3.0.2",
+    "tailwind-merge": "^3.1.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.24.2"
   }

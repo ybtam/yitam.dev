@@ -22,7 +22,7 @@
   "dependencies": {
     "@apps/db": "workspace:*",
     "@fastify/cors": "^11.0.1",
-    "@trpc/server": "^11.0.1",
+    "@trpc/server": "^11.0.2",
     "bcryptjs": "^3.0.2",
     "drizzle-orm": "^0.40.1",
     "fastify": "^5.2.2",
@@ -36,7 +36,7 @@
     "@repo/config-typescript": "workspace:*",
     "@types/cors": "^2.8.17",
     "@types/jsonwebtoken": "^9.0.9",
-    "@types/node": "^22.13.14",
+    "@types/node": "^22.14.0",
     "eslint": "^9.23.0",
     "prettier": "^3.5.3",
     "tsx": "^4.19.3",
