@@ -37,7 +37,7 @@
     "@repo/config-eslint": "workspace:*",
     "@repo/config-prettier": "workspace:*",
     "@repo/config-typescript": "workspace:*",
-    "@types/node": "^22.13.14",
+    "@types/node": "^22.14.0",
     "@types/pg": "^8.11.11",
     "drizzle-kit": "^0.30.6",
     "eslint": "^9.23.0",
