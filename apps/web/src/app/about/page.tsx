@@ -2,6 +2,7 @@ import Image from "next/image"
 import { Briefcase, GraduationCap, Award } from "lucide-react"
 import { Badge, Card, CardContent } from '@repo/ui'
 import { Experience } from '@/app/about/_components/experience.tsx'
+import { Education } from "./_components/education"
 
 export default function AboutPage() {
   return (
@@ -65,52 +66,7 @@ export default function AboutPage() {
           </section>
 
           <Experience/>
-
-          <section>
-            <h2 className="text-2xl font-bold mb-4">Education</h2>
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-start gap-4">
-                  <GraduationCap className="h-6 w-6 text-primary mt-1" />
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <h3 className="font-bold">Bachelor of Science in Computer Science</h3>
-                      <Badge variant="outline">2014 - 2018</Badge>
-                    </div>
-                    <p className="text-muted-foreground">University Name</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold mb-4">Certifications</h2>
-            <div className="space-y-4">
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <Award className="h-6 w-6 text-primary mt-1" />
-                    <div>
-                      <h3 className="font-bold">AWS Certified Developer</h3>
-                      <p className="text-muted-foreground">Amazon Web Services</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <Award className="h-6 w-6 text-primary mt-1" />
-                    <div>
-                      <h3 className="font-bold">Professional Scrum Master I</h3>
-                      <p className="text-muted-foreground">Scrum.org</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </section>
+          <Education/>
         </div>
       </div>
     </div>

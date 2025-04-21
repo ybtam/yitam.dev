@@ -25,6 +25,18 @@ const experience = publicProcedure.query(async () => {
   ]
 })
 
+const education = publicProcedure.query(async () => {
+  return [
+    {
+      course: 'Bachelor of Science in Computer Science',
+      school: 'University of Sussex',
+      start: '2016',
+      end: '2020'
+    }
+  ]
+})
+
 export const cvQueries = {
-  experience
+  experience,
+  education
 }

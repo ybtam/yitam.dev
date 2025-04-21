@@ -31,7 +31,7 @@ const Loader = () => {
         <CardContent className="p-6">
           <div className="flex items-start gap-4">
             <Briefcase className="h-6 w-6 text-primary mt-1" />
-            <div>
+            <div className="w-full">
               <div className="flex items-center justify-between">
                 <h3 className="font-bold">{experience.title}</h3>
                 <Badge variant="outline">{experience.years}</Badge>
