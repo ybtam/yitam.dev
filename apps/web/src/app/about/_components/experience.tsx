@@ -2,7 +2,7 @@
 
 import { Badge, Card, CardContent } from '@repo/ui'
 import { Briefcase } from 'lucide-react'
-import { trpcClient, useTRPC } from '@repo/sdk'
+import { useTRPC } from '@repo/sdk'
 import { Suspense } from 'react'
 import { useSuspenseQuery } from '@tanstack/react-query'
 
