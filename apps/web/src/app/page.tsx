@@ -2,6 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight, ExternalLink, FileText, Github } from "lucide-react"
 import { Badge, Button, Card, CardContent } from '@repo/ui'
+import { Skills } from '@/app/_copmponents/skills.tsx'
 
 export default function HomePage() {
   return (
@@ -86,23 +87,7 @@ export default function HomePage() {
                 </li>
               </ul>
             </div>
-            <div className="flex flex-col justify-center space-y-4">
-              <h3 className="text-xl font-bold">Skills</h3>
-              <div className="flex flex-wrap gap-2">
-                <Badge>JavaScript</Badge>
-                <Badge>TypeScript</Badge>
-                <Badge>React</Badge>
-                <Badge>Next.js</Badge>
-                <Badge>Node.js</Badge>
-                <Badge>Python</Badge>
-                <Badge>SQL</Badge>
-                <Badge>MongoDB</Badge>
-                <Badge>AWS</Badge>
-                <Badge>Docker</Badge>
-                <Badge>Git</Badge>
-                <Badge>CI/CD</Badge>
-              </div>
-            </div>
+            <Skills/>
           </div>
         </div>
       </section>
