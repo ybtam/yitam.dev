@@ -17,24 +17,24 @@
   },
   "peerDependencies": {
     "@apps/api": "workspace:*",
-    "@tanstack/react-query": "^5.66.11",
-    "next": "^15.1.0",
-    "react": "^19.0.0",
-    "typescript": "^5.7.2"
+    "@tanstack/react-query": "^5.74.4",
+    "next": "^15.3.1",
+    "react": "^19.1.0",
+    "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@trpc/client": "^11.0.2",
-    "@trpc/tanstack-react-query": "^11.0.2",
-    "next-auth": "5.0.0-beta.25",
-    "zod": "^3.24.2"
+    "@trpc/client": "^11.1.0",
+    "@trpc/tanstack-react-query": "^11.1.0",
+    "next-auth": "5.0.0-beta.26",
+    "zod": "^3.24.3"
   },
   "devDependencies": {
     "@repo/config-eslint": "workspace:*",
     "@repo/config-prettier": "workspace:*",
     "@repo/config-typescript": "workspace:*",
-    "@types/node": "^22.14.0",
-    "@types/react": "^19.1.0",
-    "eslint": "^9.23.0",
+    "@types/node": "^22.14.1",
+    "@types/react": "^19.1.2",
+    "eslint": "^9.25.0",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11"
   }
