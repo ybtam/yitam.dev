@@ -3,8 +3,7 @@ import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import {Ref} from "react";
-import {cn} from "@repo/ui/lib";
-import {Spinner} from "@repo/ui/components";
+import {cn} from '@repo/ui/lib';
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
@@ -42,16 +41,15 @@ export interface ButtonProps
   isPending?: boolean
 }
 
-const Button = ({ className, variant, size, asChild = false, ref, isPending = false, children, ...props }: ButtonProps & { ref?: Ref<HTMLButtonElement>}) => {
+const Button = ({ className, variant, size, asChild = false, ref, children, ...props }: ButtonProps & { ref?: Ref<HTMLButtonElement>}) => {
   const Comp = asChild ? Slot : "button"
   return (
     <Comp
       className={cn(buttonVariants({ variant, size, className }))}
-      disabled={isPending}
       ref={ref}
       {...props}
     >
-      {children} {isPending && <Spinner/>}
+      {children}
     </Comp>
   )
 }
