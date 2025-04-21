@@ -36,7 +36,50 @@ const education = publicProcedure.query(async () => {
   ]
 })
 
+const skills = publicProcedure.query(async () => {
+  return [
+    {label: 'Languages', values: ['Typescript', 'PHP', 'Python']},
+    {
+      label: 'Frameworks/Libraries',
+      values: ['Next.js', 'React.js', 'Flutter', 'TRPC']
+    },
+    {
+      label: 'Styling',
+      values: ['TailwindCss']
+    },
+    {
+      label: 'Monorepo tools',
+      values: ['Turborepo']
+    },
+    {
+      label: 'DevOps',
+      values: ['Docker', 'Kubernetes', 'Gitlab CI/CD', 'Github Actions']
+    },
+    {
+      label: 'Cloud Platforms',
+      values: ['AWS', 'Azure', 'Cloudflare']
+    },
+    {
+      label: 'Database',
+      values: ['PostgresSQL', 'MySQL']
+    },
+    {
+      label: 'API protocols',
+      values: ['REST', 'GraphQL']
+    },
+    {
+      label: 'Version control',
+      values: ['Git', 'Github', 'Gitlab']
+    },
+    {
+      label: 'Other tools',
+      values: ['LaTex']
+    }
+  ]
+})
+
 export const cvQueries = {
   experience,
-  education
+  education,
+  skills
 }

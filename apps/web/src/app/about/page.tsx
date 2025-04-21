@@ -1,8 +1,8 @@
 import Image from "next/image"
-import { Briefcase, GraduationCap, Award } from "lucide-react"
-import { Badge, Card, CardContent } from '@repo/ui'
+import { Badge } from '@repo/ui'
 import { Experience } from '@/app/about/_components/experience.tsx'
 import { Education } from "./_components/education"
+import { Skills } from '@/app/about/_components/skills.tsx'
 
 export default function AboutPage() {
   return (
@@ -25,23 +25,7 @@ export default function AboutPage() {
             <h2 className="text-2xl font-bold">Your Name</h2>
             <p className="text-muted-foreground">Software Engineer</p>
           </div>
-          <div className="w-full">
-            <h3 className="font-bold mb-2">Skills</h3>
-            <div className="flex flex-wrap gap-2">
-              <Badge>JavaScript</Badge>
-              <Badge>TypeScript</Badge>
-              <Badge>React</Badge>
-              <Badge>Next.js</Badge>
-              <Badge>Node.js</Badge>
-              <Badge>Python</Badge>
-              <Badge>SQL</Badge>
-              <Badge>MongoDB</Badge>
-              <Badge>AWS</Badge>
-              <Badge>Docker</Badge>
-              <Badge>Git</Badge>
-              <Badge>CI/CD</Badge>
-            </div>
-          </div>
+          <Skills/>
         </div>
 
         <div className="space-y-8">
