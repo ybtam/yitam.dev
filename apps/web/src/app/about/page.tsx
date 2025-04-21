@@ -1,8 +1,8 @@
 import Image from "next/image"
-import { Badge } from '@repo/ui'
 import { Experience } from '@/app/about/_components/experience.tsx'
 import { Education } from "./_components/education"
 import { Skills } from '@/app/about/_components/skills.tsx'
+import { MyStory } from '@/app/about/_components/my-story.tsx'
 
 export default function AboutPage() {
   return (
@@ -16,39 +16,20 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="grid gap-12 lg:grid-cols-[1fr_2fr]">
+      <div className="grid gap-10 lg:grid-cols-[1fr_2fr]">
         <div className="flex flex-col items-center gap-6">
           <div className="relative h-[300px] w-[300px] rounded-full overflow-hidden border-4 border-primary">
-            <Image src="/placeholder.svg?height=300&width=300" alt="Your Name" fill className="object-cover" />
+            <Image src="https://media.licdn.com/dms/image/v2/C5603AQGkfXxDKIcxdA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1571825990259?e=1750896000&v=beta&t=Lz4uxBEtrdt2GtHxTf7dv2Y8e9q8t_vB6AynK12Ni5A" alt="Your Name" fill className="object-cover" />
           </div>
           <div className="text-center">
-            <h2 className="text-2xl font-bold">Your Name</h2>
-            <p className="text-muted-foreground">Software Engineer</p>
+            <h2 className="text-2xl font-bold">Yi Tam</h2>
+            <p className="text-muted-foreground">Software Engineer / Full Stack Developer / Project Manager</p>
           </div>
           <Skills/>
         </div>
 
         <div className="space-y-8">
-          <section>
-            <h2 className="text-2xl font-bold mb-4">My Story</h2>
-            <div className="space-y-4">
-              <p>
-                Hello! I'm a passionate software engineer with X years of experience in building web applications. My
-                journey in software development began when I was in college, where I discovered my love for creating
-                things with code.
-              </p>
-              <p>
-                Throughout my career, I've worked on a variety of projects, from small websites to large-scale
-                enterprise applications. I'm particularly interested in creating user-friendly interfaces and solving
-                complex problems with elegant solutions.
-              </p>
-              <p>
-                When I'm not coding, you can find me hiking, reading, or exploring new technologies. I'm always looking
-                to learn and grow, both as a developer and as a person.
-              </p>
-            </div>
-          </section>
-
+          <MyStory/>
           <Experience/>
           <Education/>
         </div>
