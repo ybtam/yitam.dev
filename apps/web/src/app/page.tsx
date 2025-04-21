@@ -8,7 +8,7 @@ export default function HomePage() {
     <div className="flex flex-col items-center">
       <section className="flex justify-center w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-muted">
         <div className="container px-4 md:px-6">
-          <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
+          <div className="flex justify-between gap-10 max-w-[1100px] mx-auto">
             <div className="flex flex-col justify-center space-y-4">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
@@ -33,7 +33,7 @@ export default function HomePage() {
             <div className="flex items-center justify-center">
               <div className="relative h-[300px] w-[300px] md:h-[400px] md:w-[400px] rounded-full overflow-hidden border-4 border-primary">
                 <Image
-                  src="/placeholder.svg?height=400&width=400"
+                  src="https://media.licdn.com/dms/image/v2/C5603AQGkfXxDKIcxdA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1571825990259?e=1750896000&v=beta&t=Lz4uxBEtrdt2GtHxTf7dv2Y8e9q8t_vB6AynK12Ni5A"
                   alt="Your Name"
                   fill
                   className="object-cover"
