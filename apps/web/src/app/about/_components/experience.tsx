@@ -32,18 +32,28 @@ const Loader = () => {
           <div className="flex items-start gap-4">
             <Briefcase className="h-6 w-6 text-primary mt-1" />
             <div className="w-full">
-              <div className="flex items-center justify-between">
-                <h3 className="font-bold">{experience.title}</h3>
-                <Badge variant="outline">{experience.years}</Badge>
-              </div>
               <p className="text-muted-foreground">
                 {experience.company}
               </p>
-              <ul className="list-disc list-inside mt-2 space-y-1 text-sm">
-                {experience.responsibilities.map((responsibility, index) => (
-                  <li key={index}>{responsibility}</li>
-                ))}
-              </ul>
+              <div className={'flex flex-col gap-2'}>
+                {
+                  experience.history.map(job => (
+                    <div key={job.title}>
+                      <div className="flex items-center justify-between">
+                        <h3 className="font-bold">{job.title}</h3>
+                        <Badge variant="outline">{job.years}</Badge>
+                      </div>
+                      <p>{job.description}</p>
+                      <ul className="list-disc list-inside mt-2 space-y-1 text-sm">
+                        {job.responsibilities.map((responsibility, index) => (
+                          <li key={index}>{responsibility}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))
+                }
+              </div>
+
             </div>
           </div>
         </CardContent>
