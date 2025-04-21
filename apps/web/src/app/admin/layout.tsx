@@ -1,6 +1,6 @@
 import type React from "react"
 import { redirect } from "next/navigation"
-import { AdminNav } from "@/components/admin-nav"
+import { AdminNav } from "./_components/admin-nav"
 
 // This is a mock authentication check
 // In a real application, you would use a proper authentication system

@@ -1,7 +1,6 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@repo/ui'
 import { ArrowUpRight, Users, FileText, Eye, ArrowRight } from "lucide-react"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
 
 export default function AdminDashboardPage() {
   return (
