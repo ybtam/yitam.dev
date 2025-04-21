@@ -1,5 +1,5 @@
 #todo change name
-name: mono-kadze-repo
+name: yitam.dev
 services:
   db:
     image: postgres:latest
