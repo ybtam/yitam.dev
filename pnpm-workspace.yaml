@@ -2,10 +2,10 @@ packages:
   - apps/**/*
   - packages/*
   - tests/*
-
 onlyBuiltDependencies:
+  - '@parcel/watcher'
   - '@sentry/cli'
   - core-js
+  - cypress
   - esbuild
   - sharp
-  - cypress
