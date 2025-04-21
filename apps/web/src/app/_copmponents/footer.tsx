@@ -3,11 +3,11 @@ import { Github, Linkedin, Twitter } from "lucide-react"
 
 export function Footer() {
   return (
-    <footer className="border-t">
+    <footer className="border-t flex items-center justify-center">
       <div className="container flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
         <div className="text-center md:text-left">
           <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} YourName. All rights reserved.
+            &copy; {new Date().getFullYear()} Yi Tam. All rights reserved.
           </p>
         </div>
         <div className="flex items-center gap-4">

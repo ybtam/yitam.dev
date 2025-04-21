@@ -69,7 +69,7 @@ const projects = [
 
 export default function ProjectsPage() {
   return (
-    <div className="container py-12 md:py-16 lg:py-24">
+    <div className="mx-auto container py-12 md:py-16 lg:py-24">
       <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
         <div className="space-y-2">
           <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">Projects</h1>

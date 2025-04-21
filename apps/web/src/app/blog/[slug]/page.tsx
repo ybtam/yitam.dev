@@ -4,8 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { notFound } from "next/navigation"
 import { ArrowLeft, Calendar, User } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
-
+import { Badge } from '@repo/ui'
 // Mock blog posts data
 const blogPosts = [
   {
@@ -124,7 +123,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
   }
 
   return (
-    <div className="container py-12 md:py-16 lg:py-24">
+    <div className="mx-auto container py-12 md:py-16 lg:py-24">
       <Link href="/blog" className="flex items-center text-primary hover:underline mb-8">
         <ArrowLeft className="mr-2 h-4 w-4" />
         Back to Blog
