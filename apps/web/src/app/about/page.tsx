@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { Briefcase, GraduationCap, Award } from "lucide-react"
 import { Badge, Card, CardContent } from '@repo/ui'
+import { Experience } from '@/app/about/_components/experience.tsx'
 
 export default function AboutPage() {
   return (
@@ -63,50 +64,7 @@ export default function AboutPage() {
             </div>
           </section>
 
-          <section>
-            <h2 className="text-2xl font-bold mb-4">Experience</h2>
-            <div className="space-y-4">
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <Briefcase className="h-6 w-6 text-primary mt-1" />
-                    <div>
-                      <div className="flex items-center justify-between">
-                        <h3 className="font-bold">Senior Software Engineer</h3>
-                        <Badge variant="outline">2021 - Present</Badge>
-                      </div>
-                      <p className="text-muted-foreground">Company Name</p>
-                      <ul className="list-disc list-inside mt-2 space-y-1 text-sm">
-                        <li>Led the development of a new product feature that increased user engagement by 30%</li>
-                        <li>Mentored junior developers and conducted code reviews</li>
-                        <li>Implemented CI/CD pipelines that reduced deployment time by 50%</li>
-                      </ul>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <Briefcase className="h-6 w-6 text-primary mt-1" />
-                    <div>
-                      <div className="flex items-center justify-between">
-                        <h3 className="font-bold">Software Engineer</h3>
-                        <Badge variant="outline">2018 - 2021</Badge>
-                      </div>
-                      <p className="text-muted-foreground">Previous Company</p>
-                      <ul className="list-disc list-inside mt-2 space-y-1 text-sm">
-                        <li>Developed and maintained multiple web applications using React and Node.js</li>
-                        <li>Collaborated with designers and product managers to deliver high-quality features</li>
-                        <li>Optimized database queries that improved application performance by 40%</li>
-                      </ul>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </section>
+          <Experience/>
 
           <section>
             <h2 className="text-2xl font-bold mb-4">Education</h2>

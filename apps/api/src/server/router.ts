@@ -1,12 +1,8 @@
 import { router } from '../trpc.js'
-import { userRouter } from '../routes/user/index.js'
 import { inferRouterInputs, inferRouterOutputs } from '@trpc/server'
-import { authRouter } from '../routes/auth/index.js'
+import { routes } from '../routes/index.js'
 
-export const appRouter = router({
-  user: userRouter,
-  auth: authRouter,
-})
+export const appRouter = router(routes)
 
 // Export type router type signature, this is used by the client.
 export type AppRouter = typeof appRouter

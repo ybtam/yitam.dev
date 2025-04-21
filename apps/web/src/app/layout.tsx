@@ -5,6 +5,7 @@ import {ThemeProvider} from 'next-themes'
 import { MainNav } from '@/app/_copmponents/main-nav.tsx'
 import { Footer } from '@/app/_copmponents/footer.tsx'
 import { Toaster } from '@repo/ui'
+import { Provider } from '@/providers/provider.tsx'
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -23,11 +24,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <div className="flex min-h-screen flex-col w-full">
-            <MainNav />
-            <main className={'flex-1'}>{children}</main>
-            <Footer />
-          </div>
+          <Provider>
+            <div className="flex min-h-screen flex-col w-full">
+              <MainNav />
+              <main className={'flex-1'}>{children}</main>
+              <Footer />
+            </div>
+          </Provider>
           <Toaster />
         </ThemeProvider>
       </body>
