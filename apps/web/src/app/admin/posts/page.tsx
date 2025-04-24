@@ -1,51 +1,58 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Badge } from "@/components/ui/badge"
-import { Edit, Plus, Trash2 } from "lucide-react"
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+import { Badge } from '@/components/ui/badge'
+import { Edit, Plus, Trash2 } from 'lucide-react'
 
 // Mock blog posts data
 const blogPosts = [
   {
     id: 1,
-    title: "Getting Started with Next.js",
-    status: "published",
-    date: "April 1, 2023",
+    title: 'Getting Started with Next.js',
+    status: 'published',
+    date: 'April 1, 2023',
     views: 1245,
-    slug: "getting-started-with-nextjs",
+    slug: 'getting-started-with-nextjs',
   },
   {
     id: 2,
-    title: "The Power of TypeScript",
-    status: "published",
-    date: "March 15, 2023",
+    title: 'The Power of TypeScript',
+    status: 'published',
+    date: 'March 15, 2023',
     views: 980,
-    slug: "power-of-typescript",
+    slug: 'power-of-typescript',
   },
   {
     id: 3,
-    title: "Building a RESTful API with Node.js",
-    status: "draft",
-    date: "February 28, 2023",
+    title: 'Building a RESTful API with Node.js',
+    status: 'draft',
+    date: 'February 28, 2023',
     views: 0,
-    slug: "building-restful-api-nodejs",
+    slug: 'building-restful-api-nodejs',
   },
   {
     id: 4,
-    title: "CSS Grid Layout: A Complete Guide",
-    status: "published",
-    date: "February 10, 2023",
+    title: 'CSS Grid Layout: A Complete Guide',
+    status: 'published',
+    date: 'February 10, 2023',
     views: 756,
-    slug: "css-grid-layout-guide",
+    slug: 'css-grid-layout-guide',
   },
   {
     id: 5,
-    title: "Introduction to Docker for Developers",
-    status: "published",
-    date: "January 25, 2023",
+    title: 'Introduction to Docker for Developers',
+    status: 'published',
+    date: 'January 25, 2023',
     views: 612,
-    slug: "introduction-to-docker",
+    slug: 'introduction-to-docker',
   },
 ]
 
@@ -82,11 +89,13 @@ export default function AdminPostsPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {blogPosts.map((post) => (
+              {blogPosts.map(post => (
                 <TableRow key={post.id}>
                   <TableCell className="font-medium">{post.title}</TableCell>
                   <TableCell>
-                    <Badge variant={post.status === "published" ? "default" : "secondary"}>{post.status}</Badge>
+                    <Badge variant={post.status === 'published' ? 'default' : 'secondary'}>
+                      {post.status}
+                    </Badge>
                   </TableCell>
                   <TableCell>{post.date}</TableCell>
                   <TableCell className="text-right">{post.views}</TableCell>
@@ -113,4 +122,3 @@ export default function AdminPostsPage() {
     </div>
   )
 }
-

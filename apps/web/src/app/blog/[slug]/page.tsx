@@ -1,15 +1,15 @@
-"use client"
+'use client'
 
-import Link from "next/link"
-import Image from "next/image"
-import { notFound } from "next/navigation"
-import { ArrowLeft, Calendar, User } from "lucide-react"
+import Link from 'next/link'
+import Image from 'next/image'
+import { notFound } from 'next/navigation'
+import { ArrowLeft, Calendar, User } from 'lucide-react'
 import { Badge } from '@repo/ui'
 // Mock blog posts data
 const blogPosts = [
   {
     id: 1,
-    title: "Getting Started with Next.js",
+    title: 'Getting Started with Next.js',
     content: `
       <p>Next.js is a React framework that enables server-side rendering and static site generation for React applications. It's designed to make it easy to build fast, SEO-friendly web applications with React.</p>
       
@@ -46,14 +46,14 @@ npm run dev</code></pre>
       <h2>Conclusion</h2>
       <p>Next.js is a powerful framework that makes it easy to build modern web applications with React. It provides a number of features out of the box that would otherwise require complex configuration, making it a great choice for both small and large projects.</p>
     `,
-    date: "April 1, 2023",
-    author: "Your Name",
-    category: "Web Development",
-    slug: "getting-started-with-nextjs",
+    date: 'April 1, 2023',
+    author: 'Your Name',
+    category: 'Web Development',
+    slug: 'getting-started-with-nextjs',
   },
   {
     id: 2,
-    title: "The Power of TypeScript",
+    title: 'The Power of TypeScript',
     content: `
       <p>TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.</p>
       
@@ -108,34 +108,36 @@ export default Button;</code></pre>
       <h2>Conclusion</h2>
       <p>TypeScript is a powerful tool that can help you write more robust JavaScript code. While it does have a learning curve, the benefits it provides in terms of code quality and developer experience make it well worth the investment.</p>
     `,
-    date: "March 15, 2023",
-    author: "Your Name",
-    category: "JavaScript",
-    slug: "power-of-typescript",
+    date: 'March 15, 2023',
+    author: 'Your Name',
+    category: 'JavaScript',
+    slug: 'power-of-typescript',
   },
 ]
 
 export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = blogPosts.find((post) => post.slug === params.slug)
+  const post = blogPosts.find(post => post.slug === params.slug)
 
   if (!post) {
     notFound()
   }
 
   return (
-    <div className="mx-auto container py-12 md:py-16 lg:py-24">
-      <Link href="/blog" className="flex items-center text-primary hover:underline mb-8">
+    <div className="container mx-auto py-12 md:py-16 lg:py-24">
+      <Link href="/blog" className="text-primary mb-8 flex items-center hover:underline">
         <ArrowLeft className="mr-2 h-4 w-4" />
         Back to Blog
       </Link>
 
-      <article className="max-w-3xl mx-auto">
+      <article className="mx-auto max-w-3xl">
         <div className="mb-8">
           <Badge variant="outline" className="mb-4">
             {post.category}
           </Badge>
-          <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">{post.title}</h1>
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+          <h1 className="mb-4 text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+            {post.title}
+          </h1>
+          <div className="text-muted-foreground flex items-center gap-4 text-sm">
             <div className="flex items-center">
               <User className="mr-2 h-4 w-4" />
               {post.author}
@@ -147,12 +149,12 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           </div>
         </div>
 
-        <div className="aspect-video relative mb-8">
+        <div className="relative mb-8 aspect-video">
           <Image
-            src={`/placeholder.svg?height=400&width=800&text=${post.slug.replace(/-/g, "+")}`}
+            src={`/placeholder.svg?height=400&width=800&text=${post.slug.replace(/-/g, '+')}`}
             alt={post.title}
             fill
-            className="object-cover rounded-lg"
+            className="rounded-lg object-cover"
           />
         </div>
 
@@ -164,4 +166,3 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
     </div>
   )
 }
-

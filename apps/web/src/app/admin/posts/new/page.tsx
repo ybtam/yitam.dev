@@ -1,45 +1,58 @@
-"use client"
+'use client'
 
-import type React from "react"
+import type React from 'react'
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { useToast } from "@/components/ui/use-toast"
-import { ArrowLeft, Save } from "lucide-react"
-import Link from "next/link"
+import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { useToast } from '@/components/ui/use-toast'
+import { ArrowLeft, Save } from 'lucide-react'
+import Link from 'next/link'
 
 export default function NewPostPage() {
   const { toast } = useToast()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
-    title: "",
-    slug: "",
-    excerpt: "",
-    content: "",
-    category: "",
-    status: "draft",
+    title: '',
+    slug: '',
+    excerpt: '',
+    content: '',
+    category: '',
+    status: 'draft',
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
+    setFormData(prev => ({ ...prev, [name]: value }))
 
     // Auto-generate slug from title
-    if (name === "title") {
+    if (name === 'title') {
       const slug = value
         .toLowerCase()
-        .replace(/[^\w\s]/gi, "")
-        .replace(/\s+/g, "-")
-      setFormData((prev) => ({ ...prev, slug }))
+        .replace(/[^\w\s]/gi, '')
+        .replace(/\s+/g, '-')
+      setFormData(prev => ({ ...prev, slug }))
     }
   }
 
   const handleSelectChange = (name: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [name]: value }))
+    setFormData(prev => ({ ...prev, [name]: value }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -47,11 +60,11 @@ export default function NewPostPage() {
     setIsSubmitting(true)
 
     // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    await new Promise(resolve => setTimeout(resolve, 1500))
 
     toast({
-      title: "Post created!",
-      description: "Your post has been created successfully.",
+      title: 'Post created!',
+      description: 'Your post has been created successfully.',
     })
 
     setIsSubmitting(false)
@@ -71,7 +84,7 @@ export default function NewPostPage() {
         </div>
         <Button onClick={handleSubmit} disabled={isSubmitting}>
           <Save className="mr-2 h-4 w-4" />
-          {isSubmitting ? "Saving..." : "Save Post"}
+          {isSubmitting ? 'Saving...' : 'Save Post'}
         </Button>
       </div>
 
@@ -87,16 +100,22 @@ export default function NewPostPage() {
                 <div className="space-y-2">
                   <label
                     htmlFor="title"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                   >
                     Title
                   </label>
-                  <Input id="title" name="title" value={formData.title} onChange={handleChange} required />
+                  <Input
+                    id="title"
+                    name="title"
+                    value={formData.title}
+                    onChange={handleChange}
+                    required
+                  />
                 </div>
                 <div className="space-y-2">
                   <label
                     htmlFor="excerpt"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                   >
                     Excerpt
                   </label>
@@ -112,7 +131,7 @@ export default function NewPostPage() {
                 <div className="space-y-2">
                   <label
                     htmlFor="content"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                   >
                     Content
                   </label>
@@ -139,20 +158,29 @@ export default function NewPostPage() {
                 <div className="space-y-2">
                   <label
                     htmlFor="slug"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                   >
                     Slug
                   </label>
-                  <Input id="slug" name="slug" value={formData.slug} onChange={handleChange} required />
+                  <Input
+                    id="slug"
+                    name="slug"
+                    value={formData.slug}
+                    onChange={handleChange}
+                    required
+                  />
                 </div>
                 <div className="space-y-2">
                   <label
                     htmlFor="category"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                   >
                     Category
                   </label>
-                  <Select value={formData.category} onValueChange={(value) => handleSelectChange("category", value)}>
+                  <Select
+                    value={formData.category}
+                    onValueChange={value => handleSelectChange('category', value)}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="Select a category" />
                     </SelectTrigger>
@@ -169,11 +197,14 @@ export default function NewPostPage() {
                 <div className="space-y-2">
                   <label
                     htmlFor="status"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                   >
                     Status
                   </label>
-                  <Select value={formData.status} onValueChange={(value) => handleSelectChange("status", value)}>
+                  <Select
+                    value={formData.status}
+                    onValueChange={value => handleSelectChange('status', value)}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="Select a status" />
                     </SelectTrigger>
@@ -186,7 +217,7 @@ export default function NewPostPage() {
               </CardContent>
               <CardFooter>
                 <Button type="submit" className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? "Saving..." : "Save Post"}
+                  {isSubmitting ? 'Saving...' : 'Save Post'}
                 </Button>
               </CardFooter>
             </Card>
@@ -197,9 +228,9 @@ export default function NewPostPage() {
                 <CardDescription>Upload a featured image for your post.</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="flex items-center justify-center border-2 border-dashed rounded-md p-6">
+                <div className="flex items-center justify-center rounded-md border-2 border-dashed p-6">
                   <div className="text-center">
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-muted-foreground text-sm">
                       Drag and drop an image here, or click to select a file
                     </p>
                     <Button variant="outline" className="mt-2">
@@ -215,4 +246,3 @@ export default function NewPostPage() {
     </div>
   )
 }
-

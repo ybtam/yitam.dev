@@ -1,6 +1,6 @@
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@repo/ui'
-import { ArrowUpRight, Users, FileText, Eye, ArrowRight } from "lucide-react"
-import Link from "next/link"
+import { ArrowUpRight, Users, FileText, Eye, ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 
 export default function AdminDashboardPage() {
   return (
@@ -14,41 +14,41 @@ export default function AdminDashboardPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Posts</CardTitle>
-            <FileText className="h-4 w-4 text-muted-foreground" />
+            <FileText className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">12</div>
-            <p className="text-xs text-muted-foreground">+2 from last month</p>
+            <p className="text-muted-foreground text-xs">+2 from last month</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Page Views</CardTitle>
-            <Eye className="h-4 w-4 text-muted-foreground" />
+            <Eye className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">2,350</div>
-            <p className="text-xs text-muted-foreground">+15% from last month</p>
+            <p className="text-muted-foreground text-xs">+15% from last month</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Users</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
+            <Users className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">120</div>
-            <p className="text-xs text-muted-foreground">+5 from last month</p>
+            <p className="text-muted-foreground text-xs">+5 from last month</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Conversion Rate</CardTitle>
-            <ArrowUpRight className="h-4 w-4 text-muted-foreground" />
+            <ArrowUpRight className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">3.2%</div>
-            <p className="text-xs text-muted-foreground">+0.5% from last month</p>
+            <p className="text-muted-foreground text-xs">+0.5% from last month</p>
           </CardContent>
         </Card>
       </div>
@@ -61,11 +61,16 @@ export default function AdminDashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <div key={i} className="flex items-center justify-between border-b pb-4 last:border-0 last:pb-0">
+              {[1, 2, 3, 4, 5].map(i => (
+                <div
+                  key={i}
+                  className="flex items-center justify-between border-b pb-4 last:border-0 last:pb-0"
+                >
                   <div>
                     <div className="font-medium">Blog Post Title {i}</div>
-                    <div className="text-sm text-muted-foreground">Published on April {i}, 2023</div>
+                    <div className="text-muted-foreground text-sm">
+                      Published on April {i}, 2023
+                    </div>
                   </div>
                   <Link href={`/admin/posts/${i}`}>
                     <Button variant="ghost" size="sm">
@@ -115,4 +120,3 @@ export default function AdminDashboardPage() {
     </div>
   )
 }
-

@@ -1,0 +1,10 @@
+package.json
+tsconfig.json
+.turbo
+.prettierignore
+.next
+Dockerfile
+public
+src/app/favicon.ico
+src/app/globals.css
+README.md
