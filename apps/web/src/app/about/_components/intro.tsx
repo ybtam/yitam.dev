@@ -8,7 +8,7 @@ import Link from 'next/link'
 export const Intro = () => {
   return (
     <div className="flex flex-col items-center gap-6 print:flex-row">
-      <div className="border-primary relative size-[300px] overflow-hidden rounded-full border-4 print:size-40">
+      <div className="border-primary relative size-[300px] overflow-hidden rounded-full border-4 print:size-36">
         <Image
           src="https://media.licdn.com/dms/image/v2/C5603AQGkfXxDKIcxdA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1571825990259?e=1750896000&v=beta&t=Lz4uxBEtrdt2GtHxTf7dv2Y8e9q8t_vB6AynK12Ni5A"
           alt="Your Name"
@@ -61,11 +61,11 @@ const Contact = ({ email, location, phone }: Props) => {
           <Mail size={16} />
           <Link href={`mailto:${email}`}>{email}</Link>
         </div>
-        <div className={'flex items-center gap-2'}>
-          <MapPin size={16} />
-          <p>{location}</p>
-        </div>
       </div>
+      {/*<div className={'flex items-center gap-2'}>*/}
+      {/*  <MapPin size={16} />*/}
+      {/*  <p>{location}</p>*/}
+      {/*</div>*/}
       <div className={'flex w-full gap-4 not-print:hidden'}>
         <div className={'flex items-center gap-2'}>
           <Linkedin size={16} />
