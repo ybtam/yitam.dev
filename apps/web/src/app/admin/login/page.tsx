@@ -4,22 +4,21 @@ import type React from 'react'
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import Link from 'next/link'
 import {
+  Button,
   Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
-import { useToast } from '@/components/ui/use-toast'
-import Link from 'next/link'
+  Input,
+  toast,
+} from '@repo/ui'
 
 export default function LoginPage() {
   const router = useRouter()
-  const { toast } = useToast()
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
@@ -39,8 +38,7 @@ export default function LoginPage() {
     await new Promise(resolve => setTimeout(resolve, 1500))
 
     // For demo purposes, always succeed
-    toast({
-      title: 'Login successful!',
+    toast.success('Login successful!', {
       description: 'Welcome back to your admin dashboard.',
     })
 
