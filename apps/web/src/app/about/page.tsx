@@ -46,8 +46,8 @@ export default function AboutPage() {
           {/*  <ExtraActivities />*/}
           {/*</AboutSection>*/}
         </div>
-        <Consent />
       </div>
+      <Consent />
     </div>
   )
 }

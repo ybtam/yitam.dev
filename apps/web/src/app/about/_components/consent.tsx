@@ -1,6 +1,6 @@
 export const Consent = () => {
   return (
-    <div className={'text-[10px] italic not-print:hidden'}>
+    <div className={'text-[8px] italic not-print:hidden'}>
       <p>
         I hereby give consent for my personal data to be processed for the purpose of conducting
         recruitment for the position for which I am applying.
