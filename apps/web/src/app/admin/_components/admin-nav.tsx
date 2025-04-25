@@ -23,18 +23,6 @@ export function AdminNav() {
       active: pathname === '/admin/posts' || pathname.startsWith('/admin/posts/'),
     },
     {
-      href: '/admin/analytics',
-      label: 'Analytics',
-      icon: BarChart,
-      active: pathname === '/admin/analytics',
-    },
-    {
-      href: '/admin/users',
-      label: 'Users',
-      icon: Users,
-      active: pathname === '/admin/users',
-    },
-    {
       href: '/admin/settings',
       label: 'Settings',
       icon: Settings,
