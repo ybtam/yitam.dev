@@ -28,7 +28,12 @@ export default function ExperiencesPage() {
           <AddNewButton />
         </div>
         <Separator />
-        <DataTable columns={columns()} data={experiences} isLoading={isLoading} searchKey="title" />
+        <DataTable
+          columns={columns()}
+          data={experiences}
+          isLoading={isLoading}
+          searchKey="jobTitle"
+        />
         <ExperienceForm />
       </div>
     </ExperienceFormProvider>
