@@ -38,7 +38,7 @@ export default function CVsPage() {
       <div className="flex items-center justify-between">
         <Heading title={`CVs (${cvs.length})`} description="Manage your CV versions" />
         <Button onClick={() => setOpen(true)}>
-          <Plus className="mr-2 h-4 w-4" />
+          <Plus className="mr-2 size-4" />
           Add New
         </Button>
       </div>

@@ -125,7 +125,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
   return (
     <div className="container mx-auto py-12 md:py-16 lg:py-24">
       <Link href="/blog" className="text-primary mb-8 flex items-center hover:underline">
-        <ArrowLeft className="mr-2 h-4 w-4" />
+        <ArrowLeft className="mr-2 size-4" />
         Back to Blog
       </Link>
 
@@ -139,11 +139,11 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           </h1>
           <div className="text-muted-foreground flex items-center gap-4 text-sm">
             <div className="flex items-center">
-              <User className="mr-2 h-4 w-4" />
+              <User className="mr-2 size-4" />
               {post.author}
             </div>
             <div className="flex items-center">
-              <Calendar className="mr-2 h-4 w-4" />
+              <Calendar className="mr-2 size-4" />
               {post.date}
             </div>
           </div>

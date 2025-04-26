@@ -38,7 +38,7 @@ export default function CompaniesPage() {
       <div className="flex items-center justify-between">
         <Heading title={`Companies (${companies.length})`} description="Manage your companies" />
         <Button onClick={() => setOpen(true)}>
-          <Plus className="mr-2 h-4 w-4" />
+          <Plus className="mr-2 size-4" />
           Add New
         </Button>
       </div>

@@ -39,7 +39,7 @@ export default function EditCVPage() {
     <div className="flex-1 space-y-4 p-8 pt-6">
       <div className="flex items-center gap-2">
         <Button variant="ghost" size="icon" onClick={() => router.push('/admin/cvs')}>
-          <ArrowLeft className="h-4 w-4" />
+          <ArrowLeft className="size-4" />
           <span className="sr-only">Back</span>
         </Button>
         <Heading title={`Edit CV: ${cv.name}`} description="Customize the content of your CV" />

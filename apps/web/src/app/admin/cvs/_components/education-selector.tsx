@@ -1,12 +1,12 @@
-"use client"
+'use client'
 
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { toast } from "@/components/ui/use-toast"
-import { ArrowDown, ArrowUp, ChevronRight, Trash } from "lucide-react"
-import type { Education } from "@/lib/types"
-import { format } from "date-fns"
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { toast } from '@/components/ui/use-toast'
+import { ArrowDown, ArrowUp, ChevronRight, Trash } from 'lucide-react'
+import type { Education } from '@/lib/types'
+import { format } from 'date-fns'
 
 interface CVEducation {
   id: string
@@ -25,11 +25,11 @@ export function EducationSelector({ cvId }: EducationSelectorProps) {
 
   // Fetch all education entries
   const { data: allEducation = [], isLoading: isLoadingAll } = useQuery({
-    queryKey: ["education"],
+    queryKey: ['education'],
     queryFn: async () => {
-      const response = await fetch("/api/education")
+      const response = await fetch('/api/education')
       if (!response.ok) {
-        throw new Error("Failed to fetch education")
+        throw new Error('Failed to fetch education')
       }
       return response.json()
     },
@@ -37,11 +37,11 @@ export function EducationSelector({ cvId }: EducationSelectorProps) {
 
   // Fetch education for this CV
   const { data: cvEducation = [], isLoading: isLoadingCV } = useQuery({
-    queryKey: ["cv-education", cvId],
+    queryKey: ['cv-education', cvId],
     queryFn: async () => {
       const response = await fetch(`/api/cvs/${cvId}/education`)
       if (!response.ok) {
-        throw new Error("Failed to fetch CV education")
+        throw new Error('Failed to fetch CV education')
       }
       return response.json()
     },
@@ -51,9 +51,9 @@ export function EducationSelector({ cvId }: EducationSelectorProps) {
   const addMutation = useMutation({
     mutationFn: async (educationId: string) => {
       const response = await fetch(`/api/cvs/${cvId}/education`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           educationId,
@@ -63,23 +63,23 @@ export function EducationSelector({ cvId }: EducationSelectorProps) {
 
       if (!response.ok) {
         const error = await response.json()
-        throw new Error(error.message || "Failed to add education")
+        throw new Error(error.message || 'Failed to add education')
       }
 
       return response.json()
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["cv-education", cvId] })
+      queryClient.invalidateQueries({ queryKey: ['cv-education', cvId] })
       toast({
-        title: "Education added",
-        description: "Education has been added to the CV.",
+        title: 'Education added',
+        description: 'Education has been added to the CV.',
       })
     },
-    onError: (error) => {
+    onError: error => {
       toast({
-        title: "Error",
+        title: 'Error',
         description: error.message,
-        variant: "destructive",
+        variant: 'destructive',
       })
     },
   })
@@ -88,39 +88,39 @@ export function EducationSelector({ cvId }: EducationSelectorProps) {
   const removeMutation = useMutation({
     mutationFn: async (cvEducationId: string) => {
       const response = await fetch(`/api/cvs/${cvId}/education/${cvEducationId}`, {
-        method: "DELETE",
+        method: 'DELETE',
       })
 
       if (!response.ok) {
         const error = await response.json()
-        throw new Error(error.message || "Failed to remove education")
+        throw new Error(error.message || 'Failed to remove education')
       }
 
       return response.json()
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["cv-education", cvId] })
+      queryClient.invalidateQueries({ queryKey: ['cv-education', cvId] })
       toast({
-        title: "Education removed",
-        description: "Education has been removed from the CV.",
+        title: 'Education removed',
+        description: 'Education has been removed from the CV.',
       })
     },
-    onError: (error) => {
+    onError: error => {
       toast({
-        title: "Error",
+        title: 'Error',
         description: error.message,
-        variant: "destructive",
+        variant: 'destructive',
       })
     },
   })
 
   // Reorder education mutation
   const reorderMutation = useMutation({
-    mutationFn: async ({ id, direction }: { id: string; direction: "up" | "down" }) => {
+    mutationFn: async ({ id, direction }: { id: string; direction: 'up' | 'down' }) => {
       const response = await fetch(`/api/cvs/${cvId}/education/${id}/reorder`, {
-        method: "PUT",
+        method: 'PUT',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           direction,
@@ -129,26 +129,27 @@ export function EducationSelector({ cvId }: EducationSelectorProps) {
 
       if (!response.ok) {
         const error = await response.json()
-        throw new Error(error.message || "Failed to reorder education")
+        throw new Error(error.message || 'Failed to reorder education')
       }
 
       return response.json()
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["cv-education", cvId] })
+      queryClient.invalidateQueries({ queryKey: ['cv-education', cvId] })
     },
-    onError: (error) => {
+    onError: error => {
       toast({
-        title: "Error",
+        title: 'Error',
         description: error.message,
-        variant: "destructive",
+        variant: 'destructive',
       })
     },
   })
 
   // Filter out education that is already in the CV
   const availableEducation = allEducation.filter(
-    (education: Education) => !cvEducation.some((cvEdu: CVEducation) => cvEdu.educationId === education.id),
+    (education: Education) =>
+      !cvEducation.some((cvEdu: CVEducation) => cvEdu.educationId === education.id),
   )
 
   const isLoading = isLoadingAll || isLoadingCV
@@ -164,21 +165,29 @@ export function EducationSelector({ cvId }: EducationSelectorProps) {
           {isLoading ? (
             <div>Loading education...</div>
           ) : availableEducation.length === 0 ? (
-            <div className="text-center py-4 text-muted-foreground">No available education</div>
+            <div className="text-muted-foreground py-4 text-center">No available education</div>
           ) : (
             <ul className="space-y-2">
               {availableEducation.map((education: Education) => (
-                <li key={education.id} className="flex items-center justify-between p-2 border rounded-md">
+                <li
+                  key={education.id}
+                  className="flex items-center justify-between rounded-md border p-2"
+                >
                   <div>
                     <div className="font-medium">{education.institution}</div>
-                    <div className="text-sm text-muted-foreground">
-                      {education.degree} {education.fieldOfStudy ? `in ${education.fieldOfStudy}` : ""} •
-                      {format(new Date(education.startDate), "yyyy")} -
-                      {education.endDate ? format(new Date(education.endDate), "yyyy") : "Present"}
+                    <div className="text-muted-foreground text-sm">
+                      {education.degree}{' '}
+                      {education.fieldOfStudy ? `in ${education.fieldOfStudy}` : ''} •
+                      {format(new Date(education.startDate), 'yyyy')} -
+                      {education.endDate ? format(new Date(education.endDate), 'yyyy') : 'Present'}
                     </div>
                   </div>
-                  <Button size="sm" onClick={() => addMutation.mutate(education.id)} disabled={addMutation.isPending}>
-                    <ChevronRight className="h-4 w-4" />
+                  <Button
+                    size="sm"
+                    onClick={() => addMutation.mutate(education.id)}
+                    disabled={addMutation.isPending}
+                  >
+                    <ChevronRight className="size-4" />
                     <span className="sr-only">Add</span>
                   </Button>
                 </li>
@@ -197,39 +206,44 @@ export function EducationSelector({ cvId }: EducationSelectorProps) {
           {isLoading ? (
             <div>Loading selected education...</div>
           ) : cvEducation.length === 0 ? (
-            <div className="text-center py-4 text-muted-foreground">No education selected</div>
+            <div className="text-muted-foreground py-4 text-center">No education selected</div>
           ) : (
             <ul className="space-y-2">
               {cvEducation
                 .sort((a: CVEducation, b: CVEducation) => a.order - b.order)
                 .map((cvEdu: CVEducation, index: number) => (
-                  <li key={cvEdu.id} className="flex items-center justify-between p-2 border rounded-md">
+                  <li
+                    key={cvEdu.id}
+                    className="flex items-center justify-between rounded-md border p-2"
+                  >
                     <div>
                       <div className="font-medium">{cvEdu.education.institution}</div>
-                      <div className="text-sm text-muted-foreground">
-                        {cvEdu.education.degree}{" "}
-                        {cvEdu.education.fieldOfStudy ? `in ${cvEdu.education.fieldOfStudy}` : ""} •
-                        {format(new Date(cvEdu.education.startDate), "yyyy")} -
-                        {cvEdu.education.endDate ? format(new Date(cvEdu.education.endDate), "yyyy") : "Present"}
+                      <div className="text-muted-foreground text-sm">
+                        {cvEdu.education.degree}{' '}
+                        {cvEdu.education.fieldOfStudy ? `in ${cvEdu.education.fieldOfStudy}` : ''} •
+                        {format(new Date(cvEdu.education.startDate), 'yyyy')} -
+                        {cvEdu.education.endDate
+                          ? format(new Date(cvEdu.education.endDate), 'yyyy')
+                          : 'Present'}
                       </div>
                     </div>
                     <div className="flex items-center gap-1">
                       <Button
                         variant="ghost"
                         size="icon"
-                        onClick={() => reorderMutation.mutate({ id: cvEdu.id, direction: "up" })}
+                        onClick={() => reorderMutation.mutate({ id: cvEdu.id, direction: 'up' })}
                         disabled={index === 0 || reorderMutation.isPending}
                       >
-                        <ArrowUp className="h-4 w-4" />
+                        <ArrowUp className="size-4" />
                         <span className="sr-only">Move up</span>
                       </Button>
                       <Button
                         variant="ghost"
                         size="icon"
-                        onClick={() => reorderMutation.mutate({ id: cvEdu.id, direction: "down" })}
+                        onClick={() => reorderMutation.mutate({ id: cvEdu.id, direction: 'down' })}
                         disabled={index === cvEducation.length - 1 || reorderMutation.isPending}
                       >
-                        <ArrowDown className="h-4 w-4" />
+                        <ArrowDown className="size-4" />
                         <span className="sr-only">Move down</span>
                       </Button>
                       <Button
@@ -239,7 +253,7 @@ export function EducationSelector({ cvId }: EducationSelectorProps) {
                         onClick={() => removeMutation.mutate(cvEdu.id)}
                         disabled={removeMutation.isPending}
                       >
-                        <Trash className="h-4 w-4" />
+                        <Trash className="size-4" />
                         <span className="sr-only">Remove</span>
                       </Button>
                     </div>

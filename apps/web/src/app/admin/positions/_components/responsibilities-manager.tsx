@@ -195,7 +195,7 @@ export function ResponsibilitiesManager({ positionId }: ResponsibilitiesManagerP
           disabled={!newResponsibility.trim() || addMutation.isPending}
           size="icon"
         >
-          <Plus className="h-4 w-4" />
+          <Plus className="size-4" />
         </Button>
       </div>
 
@@ -239,7 +239,7 @@ export function ResponsibilitiesManager({ positionId }: ResponsibilitiesManagerP
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="h-4 w-4"
+                      className="size-4"
                     >
                       <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
                       <path d="m15 5 4 4" />
@@ -252,7 +252,7 @@ export function ResponsibilitiesManager({ positionId }: ResponsibilitiesManagerP
                     className="text-destructive"
                   >
                     <span className="sr-only">Delete</span>
-                    <Trash2 className="h-4 w-4" />
+                    <Trash2 className="size-4" />
                   </Button>
                   <Button
                     onClick={() => handleReorder(responsibility.id, 'up')}
@@ -261,7 +261,7 @@ export function ResponsibilitiesManager({ positionId }: ResponsibilitiesManagerP
                     disabled={responsibility.order === 0}
                   >
                     <span className="sr-only">Move up</span>
-                    <ArrowUp className="h-4 w-4" />
+                    <ArrowUp className="size-4" />
                   </Button>
                   <Button
                     onClick={() => handleReorder(responsibility.id, 'down')}
@@ -270,7 +270,7 @@ export function ResponsibilitiesManager({ positionId }: ResponsibilitiesManagerP
                     disabled={responsibility.order === responsibilities.length - 1}
                   >
                     <span className="sr-only">Move down</span>
-                    <ArrowDown className="h-4 w-4" />
+                    <ArrowDown className="size-4" />
                   </Button>
                 </>
               )}

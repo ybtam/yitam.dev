@@ -61,7 +61,7 @@ export function DeleteCVButton({ id, name }: DeleteCVButtonProps) {
         }}
         className="text-destructive focus:text-destructive"
       >
-        <Trash className="mr-2 h-4 w-4" />
+        <Trash className="mr-2 size-4" />
         Delete
       </DropdownMenuItem>
       <AlertDialog open={open} onOpenChange={setOpen}>

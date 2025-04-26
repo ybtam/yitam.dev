@@ -179,7 +179,7 @@ export function SkillsSelector({ cvId }: SkillsSelectorProps) {
                     onClick={() => addMutation.mutate(skill.id)}
                     disabled={addMutation.isPending}
                   >
-                    <ChevronRight className="h-4 w-4" />
+                    <ChevronRight className="size-4" />
                     <span className="sr-only">Add</span>
                   </Button>
                 </li>
@@ -223,7 +223,7 @@ export function SkillsSelector({ cvId }: SkillsSelectorProps) {
                         onClick={() => reorderMutation.mutate({ id: cvSkill.id, direction: 'up' })}
                         disabled={index === 0 || reorderMutation.isPending}
                       >
-                        <ArrowUp className="h-4 w-4" />
+                        <ArrowUp className="size-4" />
                         <span className="sr-only">Move up</span>
                       </Button>
                       <Button
@@ -234,7 +234,7 @@ export function SkillsSelector({ cvId }: SkillsSelectorProps) {
                         }
                         disabled={index === cvSkills.length - 1 || reorderMutation.isPending}
                       >
-                        <ArrowDown className="h-4 w-4" />
+                        <ArrowDown className="size-4" />
                         <span className="sr-only">Move down</span>
                       </Button>
                       <Button
@@ -244,7 +244,7 @@ export function SkillsSelector({ cvId }: SkillsSelectorProps) {
                         onClick={() => removeMutation.mutate(cvSkill.id)}
                         disabled={removeMutation.isPending}
                       >
-                        <Trash className="h-4 w-4" />
+                        <Trash className="size-4" />
                         <span className="sr-only">Remove</span>
                       </Button>
                     </div>

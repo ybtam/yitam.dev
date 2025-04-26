@@ -101,7 +101,7 @@ export function CVHeader({ cv }: CVHeaderProps) {
                 Cancel
               </Button>
               <Button onClick={handleSave} disabled={mutation.isPending}>
-                <Save className="mr-2 h-4 w-4" />
+                <Save className="mr-2 size-4" />
                 {mutation.isPending ? 'Saving...' : 'Save'}
               </Button>
             </div>
@@ -111,7 +111,7 @@ export function CVHeader({ cv }: CVHeaderProps) {
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-bold">{cv.name}</h2>
               <Button variant="ghost" size="icon" onClick={() => setIsEditing(true)}>
-                <Edit className="h-4 w-4" />
+                <Edit className="size-4" />
                 <span className="sr-only">Edit</span>
               </Button>
             </div>

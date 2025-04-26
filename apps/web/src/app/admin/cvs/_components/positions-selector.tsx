@@ -1,12 +1,12 @@
-"use client"
+'use client'
 
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { toast } from "@/components/ui/use-toast"
-import { ArrowDown, ArrowUp, ChevronRight, Trash } from "lucide-react"
-import type { Position } from "@/lib/types"
-import { format } from "date-fns"
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { toast } from '@/components/ui/use-toast'
+import { ArrowDown, ArrowUp, ChevronRight, Trash } from 'lucide-react'
+import type { Position } from '@/lib/types'
+import { format } from 'date-fns'
 
 interface PositionWithCompany extends Position {
   company: {
@@ -31,11 +31,11 @@ export function PositionsSelector({ cvId }: PositionsSelectorProps) {
 
   // Fetch all positions
   const { data: allPositions = [], isLoading: isLoadingAll } = useQuery({
-    queryKey: ["positions"],
+    queryKey: ['positions'],
     queryFn: async () => {
-      const response = await fetch("/api/positions")
+      const response = await fetch('/api/positions')
       if (!response.ok) {
-        throw new Error("Failed to fetch positions")
+        throw new Error('Failed to fetch positions')
       }
       return response.json()
     },
@@ -43,11 +43,11 @@ export function PositionsSelector({ cvId }: PositionsSelectorProps) {
 
   // Fetch positions for this CV
   const { data: cvPositions = [], isLoading: isLoadingCV } = useQuery({
-    queryKey: ["cv-positions", cvId],
+    queryKey: ['cv-positions', cvId],
     queryFn: async () => {
       const response = await fetch(`/api/cvs/${cvId}/positions`)
       if (!response.ok) {
-        throw new Error("Failed to fetch CV positions")
+        throw new Error('Failed to fetch CV positions')
       }
       return response.json()
     },
@@ -57,9 +57,9 @@ export function PositionsSelector({ cvId }: PositionsSelectorProps) {
   const addMutation = useMutation({
     mutationFn: async (positionId: string) => {
       const response = await fetch(`/api/cvs/${cvId}/positions`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           positionId,
@@ -69,23 +69,23 @@ export function PositionsSelector({ cvId }: PositionsSelectorProps) {
 
       if (!response.ok) {
         const error = await response.json()
-        throw new Error(error.message || "Failed to add position")
+        throw new Error(error.message || 'Failed to add position')
       }
 
       return response.json()
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["cv-positions", cvId] })
+      queryClient.invalidateQueries({ queryKey: ['cv-positions', cvId] })
       toast({
-        title: "Position added",
-        description: "Position has been added to the CV.",
+        title: 'Position added',
+        description: 'Position has been added to the CV.',
       })
     },
-    onError: (error) => {
+    onError: error => {
       toast({
-        title: "Error",
+        title: 'Error',
         description: error.message,
-        variant: "destructive",
+        variant: 'destructive',
       })
     },
   })
@@ -94,39 +94,39 @@ export function PositionsSelector({ cvId }: PositionsSelectorProps) {
   const removeMutation = useMutation({
     mutationFn: async (cvPositionId: string) => {
       const response = await fetch(`/api/cvs/${cvId}/positions/${cvPositionId}`, {
-        method: "DELETE",
+        method: 'DELETE',
       })
 
       if (!response.ok) {
         const error = await response.json()
-        throw new Error(error.message || "Failed to remove position")
+        throw new Error(error.message || 'Failed to remove position')
       }
 
       return response.json()
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["cv-positions", cvId] })
+      queryClient.invalidateQueries({ queryKey: ['cv-positions', cvId] })
       toast({
-        title: "Position removed",
-        description: "Position has been removed from the CV.",
+        title: 'Position removed',
+        description: 'Position has been removed from the CV.',
       })
     },
-    onError: (error) => {
+    onError: error => {
       toast({
-        title: "Error",
+        title: 'Error',
         description: error.message,
-        variant: "destructive",
+        variant: 'destructive',
       })
     },
   })
 
   // Reorder position mutation
   const reorderMutation = useMutation({
-    mutationFn: async ({ id, direction }: { id: string; direction: "up" | "down" }) => {
+    mutationFn: async ({ id, direction }: { id: string; direction: 'up' | 'down' }) => {
       const response = await fetch(`/api/cvs/${cvId}/positions/${id}/reorder`, {
-        method: "PUT",
+        method: 'PUT',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           direction,
@@ -135,26 +135,27 @@ export function PositionsSelector({ cvId }: PositionsSelectorProps) {
 
       if (!response.ok) {
         const error = await response.json()
-        throw new Error(error.message || "Failed to reorder position")
+        throw new Error(error.message || 'Failed to reorder position')
       }
 
       return response.json()
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["cv-positions", cvId] })
+      queryClient.invalidateQueries({ queryKey: ['cv-positions', cvId] })
     },
-    onError: (error) => {
+    onError: error => {
       toast({
-        title: "Error",
+        title: 'Error',
         description: error.message,
-        variant: "destructive",
+        variant: 'destructive',
       })
     },
   })
 
   // Filter out positions that are already in the CV
   const availablePositions = allPositions.filter(
-    (position: PositionWithCompany) => !cvPositions.some((cvPos: CVPosition) => cvPos.positionId === position.id),
+    (position: PositionWithCompany) =>
+      !cvPositions.some((cvPos: CVPosition) => cvPos.positionId === position.id),
   )
 
   const isLoading = isLoadingAll || isLoadingCV
@@ -170,20 +171,29 @@ export function PositionsSelector({ cvId }: PositionsSelectorProps) {
           {isLoading ? (
             <div>Loading positions...</div>
           ) : availablePositions.length === 0 ? (
-            <div className="text-center py-4 text-muted-foreground">No available positions</div>
+            <div className="text-muted-foreground py-4 text-center">No available positions</div>
           ) : (
             <ul className="space-y-2">
               {availablePositions.map((position: PositionWithCompany) => (
-                <li key={position.id} className="flex items-center justify-between p-2 border rounded-md">
+                <li
+                  key={position.id}
+                  className="flex items-center justify-between rounded-md border p-2"
+                >
                   <div>
                     <div className="font-medium">{position.title}</div>
-                    <div className="text-sm text-muted-foreground">
-                      {position.company.name} • {format(new Date(position.startDate), "MMM yyyy")} -
-                      {position.endDate ? format(new Date(position.endDate), " MMM yyyy") : " Present"}
+                    <div className="text-muted-foreground text-sm">
+                      {position.company.name} • {format(new Date(position.startDate), 'MMM yyyy')} -
+                      {position.endDate
+                        ? format(new Date(position.endDate), ' MMM yyyy')
+                        : ' Present'}
                     </div>
                   </div>
-                  <Button size="sm" onClick={() => addMutation.mutate(position.id)} disabled={addMutation.isPending}>
-                    <ChevronRight className="h-4 w-4" />
+                  <Button
+                    size="sm"
+                    onClick={() => addMutation.mutate(position.id)}
+                    disabled={addMutation.isPending}
+                  >
+                    <ChevronRight className="size-4" />
                     <span className="sr-only">Add</span>
                   </Button>
                 </li>
@@ -202,40 +212,47 @@ export function PositionsSelector({ cvId }: PositionsSelectorProps) {
           {isLoading ? (
             <div>Loading selected positions...</div>
           ) : cvPositions.length === 0 ? (
-            <div className="text-center py-4 text-muted-foreground">No positions selected</div>
+            <div className="text-muted-foreground py-4 text-center">No positions selected</div>
           ) : (
             <ul className="space-y-2">
               {cvPositions
                 .sort((a: CVPosition, b: CVPosition) => a.order - b.order)
                 .map((cvPosition: CVPosition, index: number) => (
-                  <li key={cvPosition.id} className="flex items-center justify-between p-2 border rounded-md">
+                  <li
+                    key={cvPosition.id}
+                    className="flex items-center justify-between rounded-md border p-2"
+                  >
                     <div>
                       <div className="font-medium">{cvPosition.position.title}</div>
-                      <div className="text-sm text-muted-foreground">
-                        {cvPosition.position.company.name} •{" "}
-                        {format(new Date(cvPosition.position.startDate), "MMM yyyy")} -
+                      <div className="text-muted-foreground text-sm">
+                        {cvPosition.position.company.name} •{' '}
+                        {format(new Date(cvPosition.position.startDate), 'MMM yyyy')} -
                         {cvPosition.position.endDate
-                          ? format(new Date(cvPosition.position.endDate), " MMM yyyy")
-                          : " Present"}
+                          ? format(new Date(cvPosition.position.endDate), ' MMM yyyy')
+                          : ' Present'}
                       </div>
                     </div>
                     <div className="flex items-center gap-1">
                       <Button
                         variant="ghost"
                         size="icon"
-                        onClick={() => reorderMutation.mutate({ id: cvPosition.id, direction: "up" })}
+                        onClick={() =>
+                          reorderMutation.mutate({ id: cvPosition.id, direction: 'up' })
+                        }
                         disabled={index === 0 || reorderMutation.isPending}
                       >
-                        <ArrowUp className="h-4 w-4" />
+                        <ArrowUp className="size-4" />
                         <span className="sr-only">Move up</span>
                       </Button>
                       <Button
                         variant="ghost"
                         size="icon"
-                        onClick={() => reorderMutation.mutate({ id: cvPosition.id, direction: "down" })}
+                        onClick={() =>
+                          reorderMutation.mutate({ id: cvPosition.id, direction: 'down' })
+                        }
                         disabled={index === cvPositions.length - 1 || reorderMutation.isPending}
                       >
-                        <ArrowDown className="h-4 w-4" />
+                        <ArrowDown className="size-4" />
                         <span className="sr-only">Move down</span>
                       </Button>
                       <Button
@@ -245,7 +262,7 @@ export function PositionsSelector({ cvId }: PositionsSelectorProps) {
                         onClick={() => removeMutation.mutate(cvPosition.id)}
                         disabled={removeMutation.isPending}
                       >
-                        <Trash className="h-4 w-4" />
+                        <Trash className="size-4" />
                         <span className="sr-only">Remove</span>
                       </Button>
                     </div>

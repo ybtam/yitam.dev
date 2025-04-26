@@ -73,7 +73,7 @@ export function AdminNav() {
                 route.active ? 'bg-primary/10 text-primary' : 'text-muted-foreground',
               )}
             >
-              <route.icon className="h-4 w-4" />
+              <route.icon className="size-4" />
               {route.label}
             </Link>
           ))}
@@ -82,7 +82,7 @@ export function AdminNav() {
       <div className="mt-auto p-4">
         <Link href="/">
           <Button variant="outline" className="w-full justify-start">
-            <LogOut className="mr-2 h-4 w-4" />
+            <LogOut className="mr-2 size-4" />
             Back to Site
           </Button>
         </Link>

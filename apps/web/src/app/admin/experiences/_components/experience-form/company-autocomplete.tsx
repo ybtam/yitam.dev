@@ -97,7 +97,7 @@ export function CompanyAutocomplete({ value, onChange }: Props) {
                 >
                   <Check
                     className={cn(
-                      'mr-2 h-4 w-4',
+                      'mr-2 size-4',
                       value === company.id ? 'opacity-100' : 'opacity-0',
                     )}
                   />

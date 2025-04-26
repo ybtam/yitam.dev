@@ -24,7 +24,7 @@ export default function HomePage() {
                 <Link href="/projects">
                   <Button>
                     View My Work
-                    <ArrowRight className="ml-2 h-4 w-4" />
+                    <ArrowRight className="ml-2 size-4" />
                   </Button>
                 </Link>
                 <Link href="/contact">
@@ -123,19 +123,19 @@ export default function HomePage() {
                   <div className="mt-4 flex gap-2">
                     <Link href={`/projects/${i}`}>
                       <Button variant="outline" size="sm">
-                        <FileText className="mr-2 h-4 w-4" />
+                        <FileText className="mr-2 size-4" />
                         Details
                       </Button>
                     </Link>
                     <Link href="#" target="_blank" rel="noopener noreferrer">
                       <Button variant="outline" size="sm">
-                        <Github className="mr-2 h-4 w-4" />
+                        <Github className="mr-2 size-4" />
                         Code
                       </Button>
                     </Link>
                     <Link href="#" target="_blank" rel="noopener noreferrer">
                       <Button variant="outline" size="sm">
-                        <ExternalLink className="mr-2 h-4 w-4" />
+                        <ExternalLink className="mr-2 size-4" />
                         Demo
                       </Button>
                     </Link>
@@ -148,7 +148,7 @@ export default function HomePage() {
             <Link href="/projects">
               <Button>
                 View All Projects
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <ArrowRight className="ml-2 size-4" />
               </Button>
             </Link>
           </div>
@@ -189,7 +189,7 @@ export default function HomePage() {
                   <Link href={`/blog/post-${i}`} className="mt-4 inline-block">
                     <Button variant="link" className="p-0">
                       Read More
-                      <ArrowRight className="ml-2 h-4 w-4" />
+                      <ArrowRight className="ml-2 size-4" />
                     </Button>
                   </Link>
                 </CardContent>
@@ -200,7 +200,7 @@ export default function HomePage() {
             <Link href="/blog">
               <Button>
                 View All Posts
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <ArrowRight className="ml-2 size-4" />
               </Button>
             </Link>
           </div>
@@ -221,7 +221,7 @@ export default function HomePage() {
               <Link href="/contact">
                 <Button className="w-full">
                   Contact Me
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  <ArrowRight className="ml-2 size-4" />
                 </Button>
               </Link>
             </div>
