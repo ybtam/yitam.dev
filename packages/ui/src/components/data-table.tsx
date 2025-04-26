@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import {
-  type ColumnDef,
   type ColumnFiltersState,
   type SortingState,
   flexRender,
@@ -11,6 +10,7 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
+  ColumnDef,
 } from '@tanstack/react-table'
 import {
   Button,
@@ -24,19 +24,19 @@ import {
   TableRow,
 } from '@repo/ui/components'
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
+interface DataTableProps<TData> {
+  columns: ColumnDef<TData, any>[]
   data: TData[]
   searchKey?: string
   isLoading?: boolean
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<TData>({
   columns,
   data,
   searchKey,
   isLoading = false,
-}: DataTableProps<TData, TValue>) {
+}: DataTableProps<TData>) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 

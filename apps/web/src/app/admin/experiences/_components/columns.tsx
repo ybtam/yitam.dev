@@ -1,7 +1,7 @@
 'use client'
 
-import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
-import { ArrowUpDown, MoreHorizontal, Pencil } from 'lucide-react'
+import { createColumnHelper } from '@tanstack/react-table'
+import { MoreHorizontal, Pencil } from 'lucide-react'
 import {
   Badge,
   Button,
@@ -20,6 +20,7 @@ const columnHelper = createColumnHelper<RouterOutput['positions']['getList'][0]>
 
 export const columns = () => [
   columnHelper.accessor('jobTitle', {
+    id: 'jobTitle',
     header: 'Job Title',
   }),
   columnHelper.accessor('company.name', {
@@ -36,7 +37,7 @@ export const columns = () => [
   ),
   columnHelper.accessor('isCurrent', {
     header: 'Current',
-    cell: ({ getValue }) => (getValue() ? <Badge variant="default">Current</Badge> : null),
+    cell: ({ getValue }) => (getValue() ? <Badge variant="default">Current</Badge> : undefined),
   }),
   columnHelper.display({
     id: 'actions',
