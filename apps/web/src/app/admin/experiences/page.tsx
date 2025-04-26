@@ -10,18 +10,12 @@ import {
   ExperienceFormProvider,
   useExperienceForm,
 } from '@/app/admin/experiences/_components/experience-form/context.tsx'
+import { useTRPC } from '@repo/sdk'
 
 export default function ExperiencesPage() {
-  const { data: experiences = [], isLoading } = useQuery({
-    queryKey: ['experiences'],
-    queryFn: async () => {
-      const response = await fetch('/api/experiences')
-      if (!response.ok) {
-        throw new Error('Failed to fetch experiences')
-      }
-      return response.json()
-    },
-  })
+  const trpc = useTRPC()
+
+  const { data: experiences = [], isLoading } = useQuery(trpc.positions.getList.queryOptions())
 
   return (
     <ExperienceFormProvider>
@@ -46,7 +40,7 @@ const AddNewButton = () => {
 
   return (
     <Button onClick={() => setOpen(true)}>
-      <Plus className="mr-2 h-4 w-4" />
+      <Plus className="mr-2 size-4" />
       Add New
     </Button>
   )

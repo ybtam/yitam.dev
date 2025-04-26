@@ -1,6 +1,6 @@
 'use client'
 
-import type { ColumnDef } from '@tanstack/react-table'
+import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { ArrowUpDown, MoreHorizontal, Pencil } from 'lucide-react'
 import {
   Badge,
@@ -14,69 +14,31 @@ import {
 import { DeleteExperienceButton } from './delete-experience-button'
 import { format } from 'date-fns'
 import { useExperienceForm } from '@/app/admin/experiences/_components/experience-form/context.tsx'
+import { RouterOutput } from '@apps/api'
 
-interface Experience {
-  id: number
-  title: string
-  company: string
-  location: string
-  startDate: string
-  endDate: string | null
-  isCurrent: boolean
-  description: string
-  technologies: string
-  createdAt: string
-  updatedAt: string
-}
+const columnHelper = createColumnHelper<RouterOutput['positions']['getList'][0]>()
 
-interface ColumnsProps {
-  onEdit: (id: string) => void
-}
-
-export const columns = (): ColumnDef<Experience>[] => [
-  {
-    accessorKey: 'title',
-    header: ({ column }) => (
-      <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-        Job Title
-        <ArrowUpDown className="ml-2 h-4 w-4" />
-      </Button>
-    ),
-  },
-  {
-    accessorKey: 'company',
+export const columns = () => [
+  columnHelper.accessor('jobTitle', {
+    header: 'Job Title',
+  }),
+  columnHelper.accessor('company.name', {
     header: 'Company',
-  },
-  {
-    accessorKey: 'location',
-    header: 'Location',
-  },
-  {
-    accessorKey: 'startDate',
-    header: 'Start Date',
-    cell: ({ row }) => {
-      const date = row.getValue('startDate') as string
-      return format(new Date(date), 'MMM yyyy')
+  }),
+  columnHelper.accessor(row => format(new Date(row.startDate), 'MMM yyyy'), {
+    header: 'Start',
+  }),
+  columnHelper.accessor(
+    row => (row.endDate ? format(new Date(row.endDate), 'MMM yyyy') : 'Present'),
+    {
+      header: 'End',
     },
-  },
-  {
-    accessorKey: 'endDate',
-    header: 'End Date',
-    cell: ({ row }) => {
-      const date = row.getValue('endDate') as string | null
-      if (!date) return 'Present'
-      return format(new Date(date), 'MMM yyyy')
-    },
-  },
-  {
-    accessorKey: 'isCurrent',
+  ),
+  columnHelper.accessor('isCurrent', {
     header: 'Current',
-    cell: ({ row }) => {
-      const isCurrent = row.getValue('isCurrent') as boolean
-      return isCurrent ? <Badge variant="default">Current</Badge> : null
-    },
-  },
-  {
+    cell: ({ getValue }) => (getValue() ? <Badge variant="default">Current</Badge> : null),
+  }),
+  columnHelper.display({
     id: 'actions',
     cell: ({ row }) => {
       const { setExperienceId, setOpen } = useExperienceForm()
@@ -86,9 +48,9 @@ export const columns = (): ColumnDef<Experience>[] => [
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
+            <Button variant="ghost" className="size-8 p-0">
               <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
+              <MoreHorizontal className="size-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -99,13 +61,13 @@ export const columns = (): ColumnDef<Experience>[] => [
                 setOpen(true)
               }}
             >
-              <Pencil className="mr-2 h-4 w-4" />
+              <Pencil className="mr-2 size-4" />
               Edit
             </DropdownMenuItem>
-            <DeleteExperienceButton id={experience.id} title={experience.title} />
+            <DeleteExperienceButton id={experience.id} title={experience.jobTitle} />
           </DropdownMenuContent>
         </DropdownMenu>
       )
     },
-  },
+  }),
 ]
