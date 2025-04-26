@@ -18,10 +18,11 @@ import { cn } from '@repo/ui/lib'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useTRPC } from '@repo/sdk'
 import { useState } from 'react'
+import { z } from 'zod'
 
 type Props = {
-  value?: string
-  onChange: (value?: string) => void
+  value?: number
+  onChange: (value?: number) => void
 }
 
 export function CompanyAutocomplete({ value, onChange }: Props) {
@@ -43,7 +44,7 @@ export function CompanyAutocomplete({ value, onChange }: Props) {
   const createCompanyMutation = useMutation(
     trpc.companies.create.mutationOptions({
       onSuccess: async data => {
-        onChange(data.id.toString())
+        onChange(data.id)
 
         onSelect(data)
         await refetch()
@@ -88,14 +89,16 @@ export function CompanyAutocomplete({ value, onChange }: Props) {
                   key={company.id}
                   value={company.id.toString()}
                   onSelect={currentValue => {
-                    onChange(currentValue === value ? '' : currentValue)
+                    const parsedValue = z.coerce.number().parse(currentValue)
+
+                    onChange(parsedValue === value ? undefined : parsedValue)
                     onSelect(company)
                   }}
                 >
                   <Check
                     className={cn(
                       'mr-2 h-4 w-4',
-                      value === company.id.toString() ? 'opacity-100' : 'opacity-0',
+                      value === company.id ? 'opacity-100' : 'opacity-0',
                     )}
                   />
                   {company.name}

@@ -4,7 +4,6 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { z } from 'zod'
 import {
   Button,
   Checkbox,
@@ -24,22 +23,10 @@ import {
   Textarea,
   toast,
 } from '@repo/ui'
-import { format } from 'date-fns'
 import { useExperienceForm } from '@/app/admin/experiences/_components/experience-form/context.tsx'
 import { CompanyAutocomplete } from '@/app/admin/experiences/_components/experience-form/company-autocomplete.tsx'
-
-const formSchema = z.object({
-  title: z.string().min(1, 'Job title is required'),
-  company: z.string().min(1, 'Company is required'),
-  location: z.string().min(1, 'Location is required'),
-  startDate: z.string().min(1, 'Start date is required'),
-  endDate: z.string().optional().nullable(),
-  isCurrent: z.boolean().default(false),
-  description: z.string().min(1, 'Description is required'),
-  technologies: z.string().optional(),
-})
-
-type FormValues = z.infer<typeof formSchema>
+import { insertPositionSchema } from '@apps/db/zod'
+import { useTRPC } from '@repo/sdk'
 
 export function ExperienceForm() {
   const { open, experienceId, setExperienceId, setOpen } = useExperienceForm()
@@ -49,111 +36,9 @@ export function ExperienceForm() {
     setExperienceId(undefined)
   }
 
-  const queryClient = useQueryClient()
   const isEditing = !!experienceId
 
-  const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      title: '',
-      company: '',
-      location: '',
-      startDate: '',
-      endDate: '',
-      isCurrent: false,
-      description: '',
-      technologies: '',
-    },
-  })
-
-  // Fetch experience data if editing
-  const { data: experience } = useQuery({
-    queryKey: ['experience', experienceId],
-    queryFn: async () => {
-      if (!experienceId) return null
-      const response = await fetch(`/api/experiences/${experienceId}`)
-      if (!response.ok) {
-        throw new Error('Failed to fetch experience')
-      }
-      return response.json()
-    },
-    enabled: isEditing,
-  })
-
-  // Update form values when experience data is loaded
-  useEffect(() => {
-    if (experience) {
-      form.reset({
-        title: experience.title,
-        company: experience.company,
-        location: experience.location,
-        startDate: experience.startDate ? format(new Date(experience.startDate), 'yyyy-MM-dd') : '',
-        endDate: experience.endDate ? format(new Date(experience.endDate), 'yyyy-MM-dd') : '',
-        isCurrent: experience.isCurrent,
-        description: experience.description,
-        technologies: experience.technologies || '',
-      })
-    } else {
-      form.reset({
-        title: '',
-        company: '',
-        location: '',
-        startDate: '',
-        endDate: '',
-        isCurrent: false,
-        description: '',
-        technologies: '',
-      })
-    }
-  }, [experience, form])
-
-  // Handle isCurrent checkbox changes
-  useEffect(() => {
-    const isCurrent = form.watch('isCurrent')
-    if (isCurrent) {
-      form.setValue('endDate', null)
-    }
-  }, [form.watch('isCurrent'), form])
-
-  // Create or update experience mutation
-  const mutation = useMutation({
-    mutationFn: async (values: FormValues) => {
-      const url = isEditing ? `/api/experiences/${experienceId}` : '/api/experiences'
-      const method = isEditing ? 'PUT' : 'POST'
-
-      const response = await fetch(url, {
-        method,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-      })
-
-      if (!response.ok) {
-        const error = await response.json()
-        throw new Error(error.message || 'Failed to save experience')
-      }
-
-      return response.json()
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['experiences'] })
-      if (isEditing) {
-        queryClient.invalidateQueries({ queryKey: ['experience', experienceId] })
-      }
-      toast(`Experience ${isEditing ? 'updated' : 'created'} successfully`)
-      onClose()
-    },
-    onError: error => {
-      toast('Error', {
-        description: error.message,
-      })
-    },
-  })
-
-  const onSubmit = (values: FormValues) => {
-    mutation.mutate(values)
-  }
+  const { form, onSubmit, isPending } = useFormSubmit({ isEditing })
 
   return (
     <Dialog open={open} onOpenChange={open => !open && onClose()}>
@@ -165,10 +50,10 @@ export function ExperienceForm() {
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={onSubmit} className="space-y-4">
             <FormField
               control={form.control}
-              name="title"
+              name="jobTitle"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Job Title</FormLabel>
@@ -179,34 +64,19 @@ export function ExperienceForm() {
                 </FormItem>
               )}
             />
-            <div className="grid grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="company"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Company</FormLabel>
-                    <FormControl>
-                      <CompanyAutocomplete {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="location"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Location</FormLabel>
-                    <FormControl>
-                      <Input placeholder="City, Country" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+            <FormField
+              control={form.control}
+              name="companyId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Company</FormLabel>
+                  <FormControl>
+                    <CompanyAutocomplete {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <div className="grid grid-cols-2 gap-4">
               <FormField
                 control={form.control}
@@ -274,34 +144,12 @@ export function ExperienceForm() {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="technologies"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Technologies Used</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="React, Node.js, TypeScript, etc."
-                      {...field}
-                      value={field.value || ''}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <DialogFooter>
-              <Button
-                type="button"
-                variant="outline"
-                onClick={onClose}
-                disabled={mutation.isPending}
-              >
+              <Button type="button" variant="outline" onClick={onClose} disabled={isPending}>
                 Cancel
               </Button>
-              <Button type="submit" disabled={mutation.isPending}>
-                {mutation.isPending ? 'Saving...' : 'Save'}
+              <Button type="submit" disabled={isPending}>
+                {isPending ? 'Saving...' : 'Save'}
               </Button>
             </DialogFooter>
           </form>
@@ -309,4 +157,56 @@ export function ExperienceForm() {
       </DialogContent>
     </Dialog>
   )
+}
+
+const useFormSubmit = ({ isEditing }: { isEditing: boolean }) => {
+  const trpc = useTRPC()
+  const { setOpen } = useExperienceForm()
+
+  const form = useForm({
+    resolver: zodResolver(insertPositionSchema),
+    defaultValues: {
+      jobTitle: '',
+      companyId: 0,
+      startDate: '',
+      endDate: '',
+      isCurrent: false,
+      description: '',
+    },
+  })
+
+  // Handle isCurrent checkbox changes
+  useEffect(() => {
+    const isCurrent = form.watch('isCurrent')
+    if (isCurrent) {
+      form.setValue('endDate', null)
+    }
+  }, [form.watch('isCurrent'), form])
+
+  // Create or update experience mutation
+  const { mutate, isPending } = useMutation(
+    trpc.positions.create.mutationOptions({
+      onSuccess: data => {
+        toast.success('Experience created successfully', {
+          description: `${data.jobTitle} | ${data.companyId}`,
+        })
+        form.reset()
+        setOpen(false)
+      },
+      onError: error => {
+        toast.error('Error creating experience', {
+          description: error.message,
+        })
+        console.error(error)
+      },
+    }),
+  )
+
+  return {
+    form,
+    onSubmit: form.handleSubmit(value => {
+      mutate(value)
+    }),
+    isPending,
+  }
 }
