@@ -161,6 +161,7 @@ export function ExperienceForm() {
 
 const useFormSubmit = ({ isEditing }: { isEditing: boolean }) => {
   const trpc = useTRPC()
+  const queryClient = useQueryClient()
   const { setOpen } = useExperienceForm()
 
   const form = useForm({
@@ -186,11 +187,14 @@ const useFormSubmit = ({ isEditing }: { isEditing: boolean }) => {
   // Create or update experience mutation
   const { mutate, isPending } = useMutation(
     trpc.positions.create.mutationOptions({
-      onSuccess: data => {
+      onSuccess: async data => {
         toast.success('Experience created successfully', {
           description: `${data.jobTitle} | ${data.companyId}`,
         })
         form.reset()
+        await queryClient.invalidateQueries({
+          queryKey: trpc.positions.getList.queryKey(),
+        })
         setOpen(false)
       },
       onError: error => {
