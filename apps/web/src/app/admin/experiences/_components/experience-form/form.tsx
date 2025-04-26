@@ -26,6 +26,7 @@ import {
 } from '@repo/ui'
 import { format } from 'date-fns'
 import { useExperienceForm } from '@/app/admin/experiences/_components/experience-form/context.tsx'
+import { CompanyAutocomplete } from '@/app/admin/experiences/_components/experience-form/company-autocomplete.tsx'
 
 const formSchema = z.object({
   title: z.string().min(1, 'Job title is required'),
@@ -186,7 +187,7 @@ export function ExperienceForm() {
                   <FormItem>
                     <FormLabel>Company</FormLabel>
                     <FormControl>
-                      <Input placeholder="Company Name" {...field} />
+                      <CompanyAutocomplete {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
