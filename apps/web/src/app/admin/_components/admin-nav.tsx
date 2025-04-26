@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { BarChart, FileText, Home, LogOut, Settings, Users } from 'lucide-react'
+import { BarChart, Building, FileText, Home, LogOut, Settings, User } from 'lucide-react'
 import { Button } from '@repo/ui'
 import { cn } from '@repo/ui/lib'
 
@@ -27,6 +27,30 @@ export function AdminNav() {
       label: 'Settings',
       icon: Settings,
       active: pathname === '/admin/settings',
+    },
+    {
+      href: '/admin/companies',
+      label: 'Companies',
+      icon: Building,
+      active: pathname === '/admin/companies' || pathname.startsWith('/admin/companies/'),
+    },
+    {
+      href: '/admin/experiences',
+      label: 'Experiences',
+      icon: BarChart,
+      active: pathname === '/admin/experiences' || pathname.startsWith('/admin/experiences/'),
+    },
+    {
+      href: '/admin/cvs',
+      label: 'CVs',
+      icon: FileText,
+      active: pathname === '/admin/cvs' || pathname.startsWith('/admin/cvs/'),
+    },
+    {
+      href: '/admin/positions',
+      label: 'Positions',
+      icon: User,
+      active: pathname === '/admin/positions' || pathname.startsWith('/admin/positions/'),
     },
   ]
 
