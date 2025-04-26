@@ -17,7 +17,7 @@ import {
 } from '@repo/ui'
 
 interface DeleteExperienceButtonProps {
-  id: string
+  id: number
   title: string
 }
 

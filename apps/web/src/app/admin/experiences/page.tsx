@@ -1,17 +1,17 @@
 'use client'
 
-import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Plus } from 'lucide-react'
 import { columns } from './_components/columns'
-import { ExperienceForm } from './_components/experience-form'
+import { ExperienceForm } from './_components/experience-form/form.tsx'
 import { Heading } from '@/app/admin/_components/heading.tsx'
 import { Button, DataTable, Separator } from '@repo/ui'
+import {
+  ExperienceFormProvider,
+  useExperienceForm,
+} from '@/app/admin/experiences/_components/experience-form/context.tsx'
 
 export default function ExperiencesPage() {
-  const [open, setOpen] = useState(false)
-  const [editingId, setEditingId] = useState<string | null>(null)
-
   const { data: experiences = [], isLoading } = useQuery({
     queryKey: ['experiences'],
     queryFn: async () => {
@@ -23,36 +23,31 @@ export default function ExperiencesPage() {
     },
   })
 
-  const onEdit = (id: string) => {
-    setEditingId(id)
-    setOpen(true)
-  }
+  return (
+    <ExperienceFormProvider>
+      <div className="flex-1 space-y-4 p-8 pt-6">
+        <div className="flex items-center justify-between">
+          <Heading
+            title={`Experiences (${experiences.length})`}
+            description="Manage your work experiences"
+          />
+          <AddNewButton />
+        </div>
+        <Separator />
+        <DataTable columns={columns()} data={experiences} isLoading={isLoading} searchKey="title" />
+        <ExperienceForm />
+      </div>
+    </ExperienceFormProvider>
+  )
+}
 
-  const onClose = () => {
-    setEditingId(null)
-    setOpen(false)
-  }
+const AddNewButton = () => {
+  const { setOpen } = useExperienceForm()
 
   return (
-    <div className="flex-1 space-y-4 p-8 pt-6">
-      <div className="flex items-center justify-between">
-        <Heading
-          title={`Experiences (${experiences.length})`}
-          description="Manage your work experiences"
-        />
-        <Button onClick={() => setOpen(true)}>
-          <Plus className="mr-2 h-4 w-4" />
-          Add New
-        </Button>
-      </div>
-      <Separator />
-      <DataTable
-        columns={columns({ onEdit })}
-        data={experiences}
-        isLoading={isLoading}
-        searchKey="title"
-      />
-      <ExperienceForm open={open} onClose={onClose} editingId={editingId} />
-    </div>
+    <Button onClick={() => setOpen(true)}>
+      <Plus className="mr-2 h-4 w-4" />
+      Add New
+    </Button>
   )
 }

@@ -13,9 +13,10 @@ import {
 } from '@repo/ui'
 import { DeleteExperienceButton } from './delete-experience-button'
 import { format } from 'date-fns'
+import { useExperienceForm } from '@/app/admin/experiences/_components/experience-form/context.tsx'
 
 interface Experience {
-  id: string
+  id: number
   title: string
   company: string
   location: string
@@ -32,7 +33,7 @@ interface ColumnsProps {
   onEdit: (id: string) => void
 }
 
-export const columns = ({ onEdit }: ColumnsProps): ColumnDef<Experience>[] => [
+export const columns = (): ColumnDef<Experience>[] => [
   {
     accessorKey: 'title',
     header: ({ column }) => (
@@ -78,6 +79,8 @@ export const columns = ({ onEdit }: ColumnsProps): ColumnDef<Experience>[] => [
   {
     id: 'actions',
     cell: ({ row }) => {
+      const { setExperienceId, setOpen } = useExperienceForm()
+
       const experience = row.original
 
       return (
@@ -90,7 +93,12 @@ export const columns = ({ onEdit }: ColumnsProps): ColumnDef<Experience>[] => [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => onEdit(experience.id)}>
+            <DropdownMenuItem
+              onClick={() => {
+                setExperienceId(experience.id)
+                setOpen(true)
+              }}
+            >
               <Pencil className="mr-2 h-4 w-4" />
               Edit
             </DropdownMenuItem>

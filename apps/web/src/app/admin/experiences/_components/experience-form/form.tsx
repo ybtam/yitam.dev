@@ -25,6 +25,7 @@ import {
   toast,
 } from '@repo/ui'
 import { format } from 'date-fns'
+import { useExperienceForm } from '@/app/admin/experiences/_components/experience-form/context.tsx'
 
 const formSchema = z.object({
   title: z.string().min(1, 'Job title is required'),
@@ -39,15 +40,16 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>
 
-interface ExperienceFormProps {
-  open: boolean
-  onClose: () => void
-  editingId: string | null
-}
+export function ExperienceForm() {
+  const { open, experienceId, setExperienceId, setOpen } = useExperienceForm()
 
-export function ExperienceForm({ open, onClose, editingId }: ExperienceFormProps) {
+  const onClose = () => {
+    setOpen(false)
+    setExperienceId(undefined)
+  }
+
   const queryClient = useQueryClient()
-  const isEditing = !!editingId
+  const isEditing = !!experienceId
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -65,10 +67,10 @@ export function ExperienceForm({ open, onClose, editingId }: ExperienceFormProps
 
   // Fetch experience data if editing
   const { data: experience } = useQuery({
-    queryKey: ['experience', editingId],
+    queryKey: ['experience', experienceId],
     queryFn: async () => {
-      if (!editingId) return null
-      const response = await fetch(`/api/experiences/${editingId}`)
+      if (!experienceId) return null
+      const response = await fetch(`/api/experiences/${experienceId}`)
       if (!response.ok) {
         throw new Error('Failed to fetch experience')
       }
@@ -115,7 +117,7 @@ export function ExperienceForm({ open, onClose, editingId }: ExperienceFormProps
   // Create or update experience mutation
   const mutation = useMutation({
     mutationFn: async (values: FormValues) => {
-      const url = isEditing ? `/api/experiences/${editingId}` : '/api/experiences'
+      const url = isEditing ? `/api/experiences/${experienceId}` : '/api/experiences'
       const method = isEditing ? 'PUT' : 'POST'
 
       const response = await fetch(url, {
@@ -136,7 +138,7 @@ export function ExperienceForm({ open, onClose, editingId }: ExperienceFormProps
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['experiences'] })
       if (isEditing) {
-        queryClient.invalidateQueries({ queryKey: ['experience', editingId] })
+        queryClient.invalidateQueries({ queryKey: ['experience', experienceId] })
       }
       toast(`Experience ${isEditing ? 'updated' : 'created'} successfully`)
       onClose()
