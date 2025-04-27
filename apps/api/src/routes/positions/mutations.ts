@@ -13,7 +13,8 @@ const create = protectedProcedure.input(createPositionSchema).mutation(async ({ 
       })
       .returning()
 
-    tx.insert(responsibilities)
+    await tx
+      .insert(responsibilities)
       .values(
         input.responsibilities.map(responsibility => ({
           ...responsibility,

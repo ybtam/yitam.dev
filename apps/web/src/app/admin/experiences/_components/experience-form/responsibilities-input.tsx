@@ -10,7 +10,6 @@ import {
   useSensors,
 } from '@dnd-kit/core'
 import {
-  arrayMove,
   SortableContext,
   sortableKeyboardCoordinates,
   useSortable,
@@ -99,11 +98,7 @@ const useSortableEvent = ({
   }
 }
 
-const SortableItem = ({
-  index,
-  id,
-  text,
-}: { index: number } & CreatePositionType['responsibilities'][0] & { id: string }) => {
+const SortableItem = ({ index, id }: { index: number; id: string }) => {
   const form = useFormContext<CreatePositionType>()
 
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
