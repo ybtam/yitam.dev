@@ -25,8 +25,9 @@ import {
 } from '@repo/ui'
 import { useExperienceForm } from '@/app/admin/experiences/_components/experience-form/context.tsx'
 import { CompanyAutocomplete } from '@/app/admin/experiences/_components/experience-form/company-autocomplete.tsx'
-import { insertPositionSchema } from '@apps/db/zod'
 import { useTRPC } from '@repo/sdk'
+import { ResponsibilitiesInput } from '@/app/admin/experiences/_components/experience-form/responsibilities-input.tsx'
+import { createPositionSchema } from '@apps/api/zod'
 
 export function ExperienceForm() {
   const { open, experienceId, setExperienceId, setOpen } = useExperienceForm()
@@ -144,6 +145,8 @@ export function ExperienceForm() {
                 </FormItem>
               )}
             />
+            {/*todo need to wrap it in form*/}
+            <ResponsibilitiesInput />
             <DialogFooter>
               <Button type="button" variant="outline" onClick={onClose} disabled={isPending}>
                 Cancel
@@ -165,7 +168,7 @@ const useFormSubmit = ({ isEditing }: { isEditing: boolean }) => {
   const { setOpen } = useExperienceForm()
 
   const form = useForm({
-    resolver: zodResolver(insertPositionSchema),
+    resolver: zodResolver(createPositionSchema),
     defaultValues: {
       jobTitle: '',
       companyId: 0,
@@ -173,6 +176,7 @@ const useFormSubmit = ({ isEditing }: { isEditing: boolean }) => {
       endDate: '',
       isCurrent: false,
       description: '',
+      responsibilities: [],
     },
   })
 

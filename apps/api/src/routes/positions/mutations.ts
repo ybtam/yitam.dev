@@ -1,17 +1,29 @@
 import { protectedProcedure } from '../../trpc.js'
 import { insertPositionSchema } from '@apps/db/zod'
-import { db, positions } from '@apps/db'
+import { db, positions, responsibilities } from '@apps/db'
+import { createPositionSchema } from './schema.js'
 
-const create = protectedProcedure.input(insertPositionSchema).mutation(async ({ ctx, input }) => {
-  const [newPosition] = await db
-    .insert(positions)
-    .values({
-      ...input,
-      userId: ctx.user.userId,
-    })
-    .returning()
+const create = protectedProcedure.input(createPositionSchema).mutation(async ({ ctx, input }) => {
+  return await db.transaction(async tx => {
+    const [newPosition] = await tx
+      .insert(positions)
+      .values({
+        ...input,
+        userId: ctx.user.userId,
+      })
+      .returning()
 
-  return newPosition
+    tx.insert(responsibilities)
+      .values(
+        input.responsibilities.map(responsibility => ({
+          ...responsibility,
+          positionId: newPosition.id,
+        })),
+      )
+      .returning()
+
+    return newPosition
+  })
 })
 
 export const positionsMutations = {

@@ -11,9 +11,8 @@ import { auth } from '@repo/sdk'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Your Name - Software Engineer',
+  title: 'Yi Tam - Software Engineer',
   description: 'Portfolio and blog of a passionate software engineer',
-  generator: 'v0.dev',
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
