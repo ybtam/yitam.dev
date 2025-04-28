@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
   Button,
   Checkbox,
@@ -165,7 +165,16 @@ export function ExperienceForm() {
 const useFormSubmit = ({ isEditing }: { isEditing: boolean }) => {
   const trpc = useTRPC()
   const queryClient = useQueryClient()
-  const { setOpen } = useExperienceForm()
+  const { setOpen, experienceId } = useExperienceForm()
+
+  const { data } = useQuery(
+    trpc.positions.get.queryOptions(
+      { id: experienceId! },
+      {
+        enabled: isEditing,
+      },
+    ),
+  )
 
   const form = useForm({
     resolver: zodResolver(createPositionSchema),
@@ -180,6 +189,12 @@ const useFormSubmit = ({ isEditing }: { isEditing: boolean }) => {
     },
   })
 
+  useEffect(() => {
+    if (data) {
+      form.reset(data)
+    }
+  }, [data])
+
   // Handle isCurrent checkbox changes
   useEffect(() => {
     const isCurrent = form.watch('isCurrent')
@@ -189,7 +204,7 @@ const useFormSubmit = ({ isEditing }: { isEditing: boolean }) => {
   }, [form.watch('isCurrent'), form])
 
   // Create or update experience mutation
-  const { mutate, isPending } = useMutation(
+  const create = useMutation(
     trpc.positions.create.mutationOptions({
       onSuccess: async data => {
         toast.success('Experience created successfully', {
@@ -210,11 +225,32 @@ const useFormSubmit = ({ isEditing }: { isEditing: boolean }) => {
     }),
   )
 
+  const update = useMutation(
+    trpc.positions.update.mutationOptions({
+      onSuccess: async data => {
+        toast.success('Experience updated successfully', {
+          description: `${data.jobTitle} | ${data.companyId}`,
+        })
+        form.reset()
+        await queryClient.invalidateQueries({
+          queryKey: trpc.positions.getList.queryKey(),
+        })
+        setOpen(false)
+      },
+      onError: error => {
+        toast.error('Error updating experience', {
+          description: error.message,
+        })
+        console.error(error)
+      },
+    }),
+  )
+
   return {
     form,
     onSubmit: form.handleSubmit(value => {
-      mutate(value)
+      create.mutate(value)
     }),
-    isPending,
+    isPending: create.isPending,
   }
 }
