@@ -1,29 +1,28 @@
 import type React from 'react'
-import { redirect } from 'next/navigation'
+import type { ReactNode } from 'react'
 import { AdminNav } from './_components/admin-nav'
+import { auth } from '@repo/sdk'
+import { cn } from '@repo/ui/lib'
 
-// This is a mock authentication check
-// In a real application, you would use a proper authentication system
-function isAuthenticated() {
-  // For demo purposes, always return true
-  // In a real app, this would check if the user is authenticated
-  return true
-}
-
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  // Check if user is authenticated
-  const authenticated = isAuthenticated()
-
-  // If not authenticated, redirect to login page
-  if (!authenticated) {
-    redirect('/admin/login')
-  }
+export default async function AdminLayout({
+  children,
+  login,
+}: {
+  children: ReactNode
+  login: ReactNode
+}) {
+  const session = await auth()
 
   return (
-    <div className="grid min-h-screen w-full md:grid-cols-[240px_1fr] lg:grid-cols-[280px_1fr]">
-      <AdminNav />
+    <div
+      className={cn(
+        'h-full flex-1',
+        session?.user && 'grid md:grid-cols-[240px_1fr] lg:grid-cols-[280px_1fr]',
+      )}
+    >
+      {session?.user && <AdminNav />}
       <div className="flex flex-col">
-        <main className="flex-1 p-6 pt-6 md:p-8">{children}</main>
+        <main className="flex-1 p-6 pt-6 md:p-8">{session?.user ? children : login}</main>
       </div>
     </div>
   )

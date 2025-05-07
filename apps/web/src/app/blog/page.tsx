@@ -91,7 +91,7 @@ export default function BlogPage() {
               <Link href={`/blog/${post.slug}`} className="mt-4 inline-block">
                 <span className="text-primary flex items-center hover:underline">
                   Read More
-                  <ArrowRight className="ml-1 h-4 w-4" />
+                  <ArrowRight className="ml-1 size-4" />
                 </span>
               </Link>
             </CardContent>

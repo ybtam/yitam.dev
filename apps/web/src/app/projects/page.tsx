@@ -111,13 +111,13 @@ export default function ProjectsPage() {
                 </Link>
                 <Link href={project.github} target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="sm">
-                    <Github className="mr-2 h-4 w-4" />
+                    <Github className="mr-2 size-4" />
                     Code
                   </Button>
                 </Link>
                 <Link href={project.demo} target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="sm">
-                    <ExternalLink className="mr-2 h-4 w-4" />
+                    <ExternalLink className="mr-2 size-4" />
                     Demo
                   </Button>
                 </Link>

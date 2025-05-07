@@ -13,7 +13,11 @@
     "AUTH_SECRET",
     "AUTH_TRUST_HOST",
     "API_URL",
-    "NEXT_PUBLIC_API_URL"
+    "NEXT_PUBLIC_API_URL",
+    "REACT_EDITOR",
+    "NEXT_PUBLIC_IMGPROXY_URL",
+    "NEXT_PUBLIC_IMGPROXY_KEY",
+    "NEXT_PUBLIC_IMGPROXY_SALT"
   ],
   "tasks": {
     "build": {
