@@ -1,7 +1,7 @@
 'use client'
 
-import { Badge } from '@repo/ui'
-import { Suspense } from 'react'
+import { Badge, Spinner } from '@repo/ui'
+import { Fragment, Suspense } from 'react'
 import { useTRPC } from '@repo/sdk'
 import { useSuspenseQuery } from '@tanstack/react-query'
 
@@ -10,7 +10,7 @@ export const Skills = () => {
     <div className="flex flex-col justify-center space-y-4">
       <h3 className="text-xl font-bold">Skills</h3>
       <div className="flex flex-wrap gap-2">
-        <Suspense>
+        <Suspense fallback={<Spinner />}>
           <Loader />
         </Suspense>
       </div>
@@ -25,11 +25,11 @@ const Loader = () => {
   return (
     <>
       {data.map(skill => (
-        <>
+        <Fragment key={skill.label}>
           {skill.values.map(value => (
-            <Badge>{value}</Badge>
+            <Badge key={value}>{value}</Badge>
           ))}
-        </>
+        </Fragment>
       ))}
     </>
   )

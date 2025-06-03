@@ -15,7 +15,7 @@ import {
 } from '@repo/ui'
 
 interface ColumnsProps {
-  onEdit: (id: string) => void
+  onEdit: (id: number) => void
 }
 
 export const columns = ({ onEdit }: ColumnsProps): ColumnDef<any>[] => [

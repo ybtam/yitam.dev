@@ -18,13 +18,12 @@ const languages = [
 
 export const AdditionalSkills = () => {
   return (
-    <div className={'grid grid-cols-[auto_1fr] gap-1 gap-x-4'}>
+    <div className={'flex gap-4'}>
       {languages.map(({ language, level }) => (
-        <Fragment key={language}>
+        <div className={'flex gap-3 border-r pr-4 last:border-r-0'} key={language}>
           <p className={'self-center print:text-xs'}>{language}</p>
           <Badge className={'print:text-xs'}>{level}</Badge>
-          <Separator className={'col-span-2'} />
-        </Fragment>
+        </div>
       ))}
     </div>
   )

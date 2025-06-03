@@ -23,100 +23,20 @@ import {
   Textarea,
   toast,
 } from '@repo/ui'
-
-const formSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
-  description: z.string().optional().nullable(),
-})
-
-type FormValues = z.infer<typeof formSchema>
+import { useTRPC } from '@repo/sdk'
+import { insertCvsSchema } from '@apps/db/zod'
 
 interface CVFormProps {
   open: boolean
   onClose: () => void
-  editingId: string | null
+  editingId?: number
 }
 
 export function CVForm({ open, onClose, editingId }: CVFormProps) {
-  const queryClient = useQueryClient()
   const isEditing = !!editingId
 
-  const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: '',
-      description: '',
-    },
-  })
-
-  // Fetch CV data if editing
-  const { data: cv } = useQuery({
-    queryKey: ['cv', editingId],
-    queryFn: async () => {
-      if (!editingId) return null
-      const response = await fetch(`/api/cvs/${editingId}`)
-      if (!response.ok) {
-        throw new Error('Failed to fetch CV')
-      }
-      return response.json()
-    },
-    enabled: isEditing,
-  })
-
-  // Update form values when CV data is loaded
-  useEffect(() => {
-    if (cv) {
-      form.reset({
-        name: cv.name,
-        description: cv.description,
-      })
-    } else {
-      form.reset({
-        name: '',
-        description: '',
-      })
-    }
-  }, [cv, form])
-
-  // Create or update CV mutation
-  const mutation = useMutation({
-    mutationFn: async (values: FormValues) => {
-      const url = isEditing ? `/api/cvs/${editingId}` : '/api/cvs'
-      const method = isEditing ? 'PUT' : 'POST'
-
-      const response = await fetch(url, {
-        method,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-      })
-
-      if (!response.ok) {
-        const error = await response.json()
-        throw new Error(error.message || 'Failed to save CV')
-      }
-
-      return response.json()
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['cvs'] })
-      if (isEditing) {
-        queryClient.invalidateQueries({ queryKey: ['cv', editingId] })
-      }
-      toast(`CV ${isEditing ? 'updated' : 'created'} successfully`)
-      onClose()
-    },
-    onError: error => {
-      toast('Error', {
-        description: error.message,
-      })
-    },
-  })
-
-  const onSubmit = (values: FormValues) => {
-    mutation.mutate(values)
-  }
+  const { form } = useCvForm({ editingId })
+  const { onSubmit, mutation } = useCvFormSubmit({ editingId, onClose })
 
   return (
     <Dialog open={open} onOpenChange={open => !open && onClose()}>
@@ -178,4 +98,80 @@ export function CVForm({ open, onClose, editingId }: CVFormProps) {
       </DialogContent>
     </Dialog>
   )
+}
+
+const useCvForm = ({ editingId }: { editingId?: number }) => {
+  const isEditing = !!editingId
+
+  const trpc = useTRPC()
+
+  const form = useForm({
+    resolver: zodResolver(insertCvsSchema),
+    defaultValues: {
+      name: '',
+      description: '',
+    },
+  })
+
+  // Fetch CV data if editing
+  const { data: cv } = useQuery(
+    trpc.cv.get.queryOptions(
+      {
+        id: editingId!,
+      },
+      {
+        enabled: isEditing,
+      },
+    ),
+  )
+
+  // Update form values when CV data is loaded
+  useEffect(() => {
+    if (cv) {
+      form.reset({
+        name: cv.name,
+        description: cv.description,
+      })
+    } else {
+      form.reset({
+        name: '',
+        description: '',
+      })
+    }
+  }, [cv, form])
+
+  return { form }
+}
+
+const useCvFormSubmit = ({ editingId, onClose }: { editingId?: number; onClose: () => void }) => {
+  const queryClient = useQueryClient()
+  const trpc = useTRPC()
+
+  const isEditing = !!editingId
+
+  const mutation = useMutation(
+    trpc.cv.create.mutationOptions({
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['cvs'] })
+        if (isEditing) {
+          queryClient.invalidateQueries({ queryKey: ['cv', editingId] })
+        }
+        toast(`CV ${isEditing ? 'updated' : 'created'} successfully`)
+        onClose()
+      },
+      onError: error => {
+        toast('Error', {
+          description: error.message,
+        })
+      },
+    }),
+  )
+  const onSubmit = (values: z.infer<typeof insertCvsSchema>) => {
+    mutation.mutate(values)
+  }
+
+  return {
+    onSubmit,
+    mutation,
+  }
 }

@@ -46,12 +46,6 @@ export function AdminNav() {
       icon: FileText,
       active: pathname === '/admin/cvs' || pathname.startsWith('/admin/cvs/'),
     },
-    {
-      href: '/admin/positions',
-      label: 'Positions',
-      icon: User,
-      active: pathname === '/admin/positions' || pathname.startsWith('/admin/positions/'),
-    },
   ]
 
   return (

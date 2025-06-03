@@ -10,7 +10,7 @@ import { Button, DataTable, Separator } from '@repo/ui'
 
 export default function CVsPage() {
   const [open, setOpen] = useState(false)
-  const [editingId, setEditingId] = useState<string | null>(null)
+  const [editingId, setEditingId] = useState<number>()
 
   const { data: cvs = [], isLoading } = useQuery({
     queryKey: ['cvs'],
@@ -23,13 +23,13 @@ export default function CVsPage() {
     },
   })
 
-  const onEdit = (id: string) => {
+  const onEdit = (id: number) => {
     setEditingId(id)
     setOpen(true)
   }
 
   const onClose = () => {
-    setEditingId(null)
+    setEditingId(undefined)
     setOpen(false)
   }
 

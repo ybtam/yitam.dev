@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 export const Intro = () => {
   return (
-    <div className="flex flex-col items-center gap-6 print:flex-row">
+    <div className="flex flex-col items-center gap-6 print:flex-row print:justify-center">
       <div className="border-primary relative size-[300px] overflow-hidden rounded-full border-4 print:size-36">
         <Image
           src="/profile/0X0A6882-Poprawione-SR.png"
