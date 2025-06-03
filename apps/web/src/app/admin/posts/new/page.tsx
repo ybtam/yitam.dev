@@ -76,14 +76,14 @@ export default function NewPostPage() {
         <div className="flex items-center gap-2">
           <Link href="/admin/posts">
             <Button variant="ghost" size="icon">
-              <ArrowLeft className="h-4 w-4" />
+              <ArrowLeft className="size-4" />
               <span className="sr-only">Back</span>
             </Button>
           </Link>
           <h1 className="text-3xl font-bold tracking-tight">New Post</h1>
         </div>
         <Button onClick={handleSubmit} disabled={isSubmitting}>
-          <Save className="mr-2 h-4 w-4" />
+          <Save className="mr-2 size-4" />
           {isSubmitting ? 'Saving...' : 'Save Post'}
         </Button>
       </div>

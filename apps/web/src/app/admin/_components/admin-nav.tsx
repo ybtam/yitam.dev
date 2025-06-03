@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { BarChart, FileText, Home, LogOut, Settings, Users } from 'lucide-react'
+import { BarChart, Building, FileText, Home, LogOut, Settings, User } from 'lucide-react'
 import { Button } from '@repo/ui'
 import { cn } from '@repo/ui/lib'
 
@@ -28,6 +28,24 @@ export function AdminNav() {
       icon: Settings,
       active: pathname === '/admin/settings',
     },
+    {
+      href: '/admin/companies',
+      label: 'Companies',
+      icon: Building,
+      active: pathname === '/admin/companies' || pathname.startsWith('/admin/companies/'),
+    },
+    {
+      href: '/admin/experiences',
+      label: 'Experiences',
+      icon: BarChart,
+      active: pathname === '/admin/experiences' || pathname.startsWith('/admin/experiences/'),
+    },
+    {
+      href: '/admin/cvs',
+      label: 'CVs',
+      icon: FileText,
+      active: pathname === '/admin/cvs' || pathname.startsWith('/admin/cvs/'),
+    },
   ]
 
   return (
@@ -49,7 +67,7 @@ export function AdminNav() {
                 route.active ? 'bg-primary/10 text-primary' : 'text-muted-foreground',
               )}
             >
-              <route.icon className="h-4 w-4" />
+              <route.icon className="size-4" />
               {route.label}
             </Link>
           ))}
@@ -58,7 +76,7 @@ export function AdminNav() {
       <div className="mt-auto p-4">
         <Link href="/">
           <Button variant="outline" className="w-full justify-start">
-            <LogOut className="mr-2 h-4 w-4" />
+            <LogOut className="mr-2 size-4" />
             Back to Site
           </Button>
         </Link>

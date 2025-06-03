@@ -27,7 +27,7 @@ const Loader = () => {
   return (
     <>
       {experiences.map((experience, index) => (
-        <Card key={index} className={'break-inside-avoid-page p-6 print:p-4'}>
+        <Card key={index} className={'break-inside-avoid-page p-6 print:p-0'}>
           <CardContent className="p-0">
             <div className="flex items-start gap-4 print:gap-2">
               <Briefcase className="text-primary mt-1 size-6 print:size-4" />

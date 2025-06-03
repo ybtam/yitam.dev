@@ -14,7 +14,7 @@ export default function AdminDashboardPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Posts</CardTitle>
-            <FileText className="text-muted-foreground h-4 w-4" />
+            <FileText className="text-muted-foreground size-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">12</div>
@@ -24,7 +24,7 @@ export default function AdminDashboardPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Page Views</CardTitle>
-            <Eye className="text-muted-foreground h-4 w-4" />
+            <Eye className="text-muted-foreground size-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">2,350</div>
@@ -34,7 +34,7 @@ export default function AdminDashboardPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Users</CardTitle>
-            <Users className="text-muted-foreground h-4 w-4" />
+            <Users className="text-muted-foreground size-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">120</div>
@@ -44,7 +44,7 @@ export default function AdminDashboardPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Conversion Rate</CardTitle>
-            <ArrowUpRight className="text-muted-foreground h-4 w-4" />
+            <ArrowUpRight className="text-muted-foreground size-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">3.2%</div>
@@ -84,7 +84,7 @@ export default function AdminDashboardPage() {
               <Link href="/admin/posts">
                 <Button variant="link" className="gap-1">
                   View all posts
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="size-4" />
                 </Button>
               </Link>
             </div>
@@ -98,19 +98,19 @@ export default function AdminDashboardPage() {
           <CardContent className="space-y-4">
             <Link href="/admin/posts/new">
               <Button className="w-full justify-start">
-                <FileText className="mr-2 h-4 w-4" />
+                <FileText className="mr-2 size-4" />
                 Create New Post
               </Button>
             </Link>
             <Link href="/admin/settings">
               <Button variant="outline" className="w-full justify-start">
-                <Users className="mr-2 h-4 w-4" />
+                <Users className="mr-2 size-4" />
                 Manage Users
               </Button>
             </Link>
             <Link href="/admin/settings">
               <Button variant="outline" className="w-full justify-start">
-                <Eye className="mr-2 h-4 w-4" />
+                <Eye className="mr-2 size-4" />
                 View Analytics
               </Button>
             </Link>

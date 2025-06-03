@@ -70,7 +70,7 @@ export default function AdminPostsPage() {
         </div>
         <Link href="/admin/posts/new">
           <Button>
-            <Plus className="mr-2 h-4 w-4" />
+            <Plus className="mr-2 size-4" />
             New Post
           </Button>
         </Link>
@@ -107,12 +107,12 @@ export default function AdminPostsPage() {
                     <div className="flex justify-end gap-2">
                       <Link href={`/admin/posts/${post.id}`}>
                         <Button variant="ghost" size="icon">
-                          <Edit className="h-4 w-4" />
+                          <Edit className="size-4" />
                           <span className="sr-only">Edit</span>
                         </Button>
                       </Link>
                       <Button variant="ghost" size="icon">
-                        <Trash2 className="h-4 w-4" />
+                        <Trash2 className="size-4" />
                         <span className="sr-only">Delete</span>
                       </Button>
                     </div>

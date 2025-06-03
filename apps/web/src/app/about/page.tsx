@@ -21,15 +21,15 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="grid gap-10 lg:grid-cols-[1fr_2fr]">
+      <div className="grid w-full gap-10 lg:grid-cols-[1fr_2fr]">
         <Intro />
 
-        <div className="space-y-8 print:space-y-4">
+        <div className="w-full space-y-8 print:space-y-3">
           <MyStory />
           <Experience />
           <Education />
           <AboutSection className={'break-inside-avoid-page not-print:hidden'} title={'Skills'}>
-            <Card className={'p-6 print:p-4'}>
+            <Card className={'p-6 print:p-2'}>
               <CardContent className={'p-0'}>
                 <Skills />
               </CardContent>

@@ -1,4 +1,6 @@
-import { publicProcedure } from '../../trpc.js'
+import { protectedProcedure, publicProcedure } from '../../trpc.js'
+import { db } from '@apps/db'
+import { z } from 'zod'
 
 const experience = publicProcedure.query(async () => {
   return [
@@ -59,6 +61,23 @@ const experience = publicProcedure.query(async () => {
         },
       ],
     },
+    {
+      company: `Tam's Property Investment Co.`,
+      history: [
+        {
+          title: 'Managing Shareholder',
+          years: '2015-present',
+          description:
+            'Managed network maintenance, ensuring optimal performance and operational efficiency',
+          responsibilities: [
+            'Oversaw server and PC maintenance tasks, contributing to a stable computing environment.',
+            'Developed an internal app automating task assignments and documenting sales, leading to a notable 50% surge in online sales and improved team efficiency.',
+            'Handled client interactions and contributed to sales strategies.',
+            'Supported CAD design tasks for new products and engaged in photo editing.',
+          ],
+        },
+      ],
+    },
   ]
 })
 
@@ -75,7 +94,7 @@ const education = publicProcedure.query(async () => {
 
 const skills = publicProcedure.query(async () => {
   return [
-    { label: 'Languages', values: ['Typescript', 'PHP', 'Python'] },
+    { label: 'Languages', values: ['Typescript', 'PHP'] },
     {
       label: 'Frameworks/Libraries',
       values: ['Next.js', 'Node.js', 'React.js', 'Flutter', 'TRPC'],
@@ -115,8 +134,21 @@ const skills = publicProcedure.query(async () => {
   ]
 })
 
+const get = protectedProcedure
+  .input(
+    z.object({
+      id: z.number(),
+    }),
+  )
+  .query(async ({ ctx, input }) => {
+    return db.query.cvs.findFirst({
+      where: (cv, { eq, and }) => and(eq(cv.userId, ctx.user.userId), eq(cv.id, input.id)),
+    })
+  })
+
 export const cvQueries = {
   experience,
   education,
   skills,
+  get,
 }
